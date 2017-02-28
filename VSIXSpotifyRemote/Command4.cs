@@ -3,7 +3,7 @@
 //     Copyright (c) Company.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
-
+//#define NO_ANIM
 
 using System;
 using System.ComponentModel.Design;
@@ -22,6 +22,7 @@ namespace VSIXSpotifyRemote
     {
 
         private const int kSHOW_TRACK_INTERVAL = 5000; //Milliseconds
+        private const int kANIMATE_SPOT_STRING = 125; //ms
         private const string kSpotifyOpenString = "Open Spotify"; 
 
         /// <summary>
@@ -90,9 +91,19 @@ namespace VSIXSpotifyRemote
             string artistName = e.NewTrack.ArtistResource.Name;
             Console.WriteLine("Show New track name: " + trackName);
             myOleCommand.Text = String.Format("{0} - {1}", trackName, artistName);
-            timer = new System.Timers.Timer() { Interval = kSHOW_TRACK_INTERVAL };
-            timer.Elapsed += TrackChangeTimerTick;
-            timer.Start();
+            if(timer != null)
+            {
+                timer.Stop();
+                timer.Start();
+            }
+            else
+            {
+                timer = new System.Timers.Timer() { Interval = kSHOW_TRACK_INTERVAL };
+                //timer.AutoReset = false;
+                timer.Elapsed += TrackChangeTimerTick;
+                timer.Start();
+            }
+            
 
         }
 
@@ -101,9 +112,41 @@ namespace VSIXSpotifyRemote
             Console.WriteLine("Set Command4 back to original String.");
             timer.Stop();
             timer.Elapsed -= TrackChangeTimerTick;
+
+#if NO_ANIM
             timer = null;
             myOleCommand.Text = kSpotifyOpenString;
+#else
+            timer.Elapsed += TimerAnimateOriginal;
+            timer.Interval = kANIMATE_SPOT_STRING;
+            timer.Start();
+#endif
         }
+
+        private void TimerAnimateOriginal(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            
+            if(myOleCommand.Text.Length == kSpotifyOpenString.Length)
+            {
+                timer.Stop();
+                timer.Elapsed -= TimerAnimateOriginal;
+                timer = null;
+                myOleCommand.Text = kSpotifyOpenString;
+            }
+            else
+            {
+                if (myOleCommand.Text.Length > kSpotifyOpenString.Length)
+                {
+                    myOleCommand.Text = myOleCommand.Text.Remove(myOleCommand.Text.Length - 1);
+                }
+                else
+                {
+                    myOleCommand.Text += " ";
+                }
+            }
+        }
+
+
 
         /// <summary>
         /// Gets the instance of the command.
