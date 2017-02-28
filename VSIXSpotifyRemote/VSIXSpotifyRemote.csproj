@@ -71,6 +71,7 @@
   <ItemGroup>
     <VSCTCompile Include="Command1Package.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
     <Content Include="index.html" />
     <Content Include="LICENSE.txt">
@@ -79,6 +80,10 @@
     </Content>
     <Content Include="Resources\Command1.png" />
     <Content Include="Resources\SpotifyRemoteLogo.ico" />
+    <Content Include="screenshot.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="SpotifyRemoteLogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

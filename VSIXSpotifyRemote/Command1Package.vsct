@@ -31,8 +31,8 @@
       <Menu guid="guidCommand1PackageCmdSet" id="Toolbar" type="Toolbar">
         <CommandFlag>DefaultDocked</CommandFlag>
         <Strings>
-          <ButtonText>Test Toolbar</ButtonText>
-          <CommandName>Test Toolbar</CommandName>
+          <ButtonText>Spotify Toolbar</ButtonText>
+          <CommandName>Spotify Toolbar</CommandName>
         </Strings>
       </Menu>
     </Menus>
@@ -76,7 +76,7 @@
         <CommandFlag>IconAndText</CommandFlag>
         <Icon guid="guidImages" id="bmpNext" />
         <Strings>
-          <ButtonText>Spotify Next</ButtonText>
+          <ButtonText>Spot Next</ButtonText>
         </Strings>
       </Button>
       
@@ -85,7 +85,7 @@
         <CommandFlag>IconAndText</CommandFlag>
         <Icon guid="guidImages" id="bmpPrevious" />
         <Strings>
-          <ButtonText>Spotify Previous</ButtonText>
+          <ButtonText>Spot Previous</ButtonText>
         </Strings>
       </Button>
       
@@ -94,12 +94,14 @@
         <CommandFlag>IconAndText</CommandFlag>
         <Icon guid="guidImages" id="bmpPlay" />
         <Strings>
-          <ButtonText>Spotify Play/Pause</ButtonText>
+          <ButtonText>Spot Play/Pause</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidCommand1PackageCmdSet" id="cmdidCommand4" priority="0x099" type="Button">
         <Parent guid="guidCommand1PackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
+        <!--<CommandFlag>DynamicVisibility</CommandFlag>-->
+        <CommandFlag>TextChanges</CommandFlag>
         <Icon guid="guidImages" id="bmpOpen" />
         <Strings>
           <ButtonText>Open Spotify</ButtonText>
@@ -117,10 +119,6 @@
       <Bitmap guid="guidImages" href="Resources\Command1.png" usedList="bmpOpen, bmpPrevious, bmpNext, bmpPlay, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
   </Commands>
-
-  <VisibilityConstraints>
-    <VisibilityItem guid="guidCommand1PackageCmdSet" id="ToolbarGroup" context="GUID_TextEditorFactory" />
-  </VisibilityConstraints>
 
   <Symbols>
     <!-- This is the package guid. -->

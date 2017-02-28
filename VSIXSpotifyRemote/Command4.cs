@@ -4,6 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+
 using System;
 using System.ComponentModel.Design;
 using System.Globalization;
@@ -19,6 +20,10 @@ namespace VSIXSpotifyRemote
     /// </summary>
     internal sealed class Command4
     {
+
+        private const int kSHOW_TRACK_INTERVAL = 5000; //Milliseconds
+        private const string kSpotifyOpenString = "Open Spotify"; 
+
         /// <summary>
         /// Command ID.
         /// </summary>
@@ -29,10 +34,14 @@ namespace VSIXSpotifyRemote
         /// </summary>
         public static readonly Guid CommandSet = new Guid("2599fe4a-622d-4cdc-8a4d-a08560938c54");
 
+
+        private OleMenuCommand myOleCommand;
+
         /// <summary>
         /// VS Package that provides this command, not null.
         /// </summary>
         private readonly Package package;
+        internal System.Timers.Timer timer;
         /// <summary>
         /// Initializes a new instance of the <see cref="Command4"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
@@ -51,19 +60,49 @@ namespace VSIXSpotifyRemote
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
+               
+               // var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
 
-                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
-                var myCommand = menuItem as OleMenuCommand;
-                if (null != myCommand)
-                {
-                    myCommand.Text = "New Text";
-                }
-                commandService.AddCommand(menuItem);
+                myOleCommand = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
+
+                //if (null != myOleCommand)
+                //{
+                //    myOleCommand.Text = "New Text";
+                //    //Microsoft.VisualStudio.Shell.ServiceProvider serviceProvider = new Microsoft.VisualStudio.Shell.ServiceProvider(((EnvDTE.DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE))) as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
+                //    //IVsUIShell uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
+                //    //uiShell.UpdateCommandUI(0);
+                //}
+
+                Command1Package.spotClient.OnTrackChange += SpotClient_OnTrackChange;
+                Command1Package.spotClient.ListenForEvents = true;
+
+                commandService.AddCommand(myOleCommand);
                 
 
             }
 
             
+        }
+
+        public void SpotClient_OnTrackChange(object sender, SpotifyAPI.Local.TrackChangeEventArgs e)
+        {
+            string trackName = e.NewTrack.TrackResource.Name;
+            string artistName = e.NewTrack.ArtistResource.Name;
+            Console.WriteLine("Show New track name: " + trackName);
+            myOleCommand.Text = String.Format("{0} - {1}", trackName, artistName);
+            timer = new System.Timers.Timer() { Interval = kSHOW_TRACK_INTERVAL };
+            timer.Elapsed += TrackChangeTimerTick;
+            timer.Start();
+
+        }
+
+        private void TrackChangeTimerTick(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Console.WriteLine("Set Command4 back to original String.");
+            timer.Stop();
+            timer.Elapsed -= TrackChangeTimerTick;
+            timer = null;
+            myOleCommand.Text = kSpotifyOpenString;
         }
 
         /// <summary>
@@ -123,6 +162,8 @@ namespace VSIXSpotifyRemote
             //tempProc.WaitForExit();
             //this.Visible = true;
 
+            //myOleCommand.Text = "Test.";
+
 
             Process[] retrevedProc = Process.GetProcessesByName("Spotify");
             Process spotMain = null;
@@ -163,7 +204,7 @@ namespace VSIXSpotifyRemote
 
 public static class WindowHelper
 {
-    public static void BringProcessToFront(Process process)
+    public static void BringProcessToFront(System.Diagnostics.Process process)
     {
         IntPtr handle = process.MainWindowHandle;
         if (IsIconic(handle))
