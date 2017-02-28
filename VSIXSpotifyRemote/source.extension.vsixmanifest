@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="VSIXSpotifyRemote.Arjan Kuijpers.73b80071-5ce8-42be-9bf9-3ecf8bf49ef5" Version="1.0" Language="en-US" Publisher="Arjan Kuijpers" />
+    <Identity Id="VSIXSpotifyRemote.Arjan Kuijpers.73b80071-5ce8-42be-9bf9-3ecf8bf49ef5" Version="1.0.1" Language="en-US" Publisher="Arjan Kuijpers" />
     <DisplayName>SpotifyRemote</DisplayName>
-    <Description xml:space="preserve">Spotify Local Remote</Description>
+    <Description xml:space="preserve">Spotify Local Remote. Take back control over Spotify.
+With SpotifyRemote you can stay inside of Visual Studio to manage Spotify without changing windows.
+This way we have the best of both worlds, Visual Studio + Spotify.</Description>
     <MoreInfo>https://github.com/arjankuijpers/SpotifyRemote</MoreInfo>
     <License>LICENSE.txt</License>
     <GettingStartedGuide>https://github.com/arjankuijpers/SpotifyRemote/blob/master/README.md</GettingStartedGuide>

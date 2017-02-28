@@ -10,9 +10,9 @@ License:
 
 
 * [Getting Started & Installation](#getting-started)
-* [Tips](##tips)
-* [FAQ](##Frequent Asked Questions)
-* [About](##about)
+* [Tips](#tips)
+* [FAQ](#frequent-asked-questions)
+* [About](#about-spotifyremote)
 
 ## Getting started
 
