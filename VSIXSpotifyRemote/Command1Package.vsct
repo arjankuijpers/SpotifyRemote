@@ -13,6 +13,8 @@
         it is possible to define includes and macros with the same syntax used
         in C++ files. Using this ability of the compiler here, we include some files
         defining some of the constants that we will use inside the file. -->
+    
+
 
   <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
   <Extern href="stdidcmd.h" />
@@ -115,6 +117,10 @@
       <Bitmap guid="guidImages" href="Resources\Command1.png" usedList="bmpOpen, bmpPrevious, bmpNext, bmpPlay, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
   </Commands>
+
+  <VisibilityConstraints>
+    <VisibilityItem guid="guidCommand1PackageCmdSet" id="ToolbarGroup" context="GUID_TextEditorFactory" />
+  </VisibilityConstraints>
 
   <Symbols>
     <!-- This is the package guid. -->
