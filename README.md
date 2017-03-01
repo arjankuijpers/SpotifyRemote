@@ -55,7 +55,9 @@ And if your changes are stable it will be merged in the release version*
 - [x] Shows track title upon change.
 
 ### Planned
-- [ ] Settings in tools menu
+- [ ] Create better interface (update icons).
+- [ ] Hide Text of play control buttons when spotify is not active.
+- [ ] Settings in tools menu.
 - [ ] Awesome features people request.
 
 ## About SpotifyRemote
