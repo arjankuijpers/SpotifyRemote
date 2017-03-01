@@ -1,6 +1,7 @@
+<img src="https://github.com/arjankuijpers/SpotifyRemote/blob/master/VSIXSpotifyRemote/Resources/SpotifyRemoteLogo.png?raw=true" width="200">
 # SpotifyRemote
 ## For Visual Studio (2015/2017)
-<img src="https://github.com/arjankuijpers/SpotifyRemote/blob/master/VSIXSpotifyRemote/Resources/SpotifyRemoteLogo.png?raw=true" width="200">
+
 
 Join the conversation on:
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/SpotifyRemoteForVisualStudio/Lobby#)  
@@ -13,6 +14,7 @@ License:
 * [Tips](#tips)
 * [FAQ](#frequent-asked-questions)
 * [About](#about-spotifyremote)
+* [Bug report & feature request](https://github.com/arjankuijpers/SpotifyRemote/issues)
 
 ## Getting started
 
@@ -26,25 +28,35 @@ License:
 
 ## Tips
 
-* **It can also start Spotify from Visual Studio**  
+**It can also start Spotify from Visual Studio?**  
 It will when you click a command and Spotify is not running.
 
 ## Frequent Asked Questions
-**Does it work on Visual Studio 2017**  
+**Does it work on Visual Studio 2017?**  
 *Yes it does, try it.*  
 
 **What can SpotifyRemote do?**  
-*Currently you can do the basic commands such as Open, Play, Pause, Next & Previous*  
-*It briefly shows the new song and artist when it changes*  
-*But that's not where it stops, See [Features](### Features) to so what is planned.*  
-You can also make a feature request.
+1. Currently you can do the basic commands such as:
+ * Open Spotify,
+ * Play
+ * Pause
+ * Next
+ * Previous  
 
-**Can I help with development**  
+2. Showing track & Artist when it changing  
+
+*But that's not where it stops, See [Features](### Features) to so what is planned.*
+You can also make a feature request (at github).
+
+**Can I help with development?**  
 *Sure you can, please fork and do your developer magic. Afterwards create a [pull request](https://github.com/arjankuijpers/SpotifyRemote/pulls).  
 And if your changes are stable it will be merged in the release version*
 
-** What version of Windows do I need **  
-*At least* Windows 7 *, Visual Studio 2015 is only supported on Window*
+**What version of Windows do I need?**  
+*At least* Windows 7 *, Visual Studio 2015 is only supported on Windows 7 and later*
+
+**What version of Visual Studio do I need?**  
+*At least* Visual Studio 2015
 
 ## Features
 ### Supported
@@ -60,6 +72,8 @@ And if your changes are stable it will be merged in the release version*
 - [ ] Settings in tools menu.
 - [ ] Awesome features people request.
 
+Do you miss a feature? Submit a request here: [Github](https://github.com/arjankuijpers/SpotifyRemote/issues)
+
 ## About SpotifyRemote
 
 SpotifyRemote is a attempt to recreate the awesome [vscode-spotify](https://marketplace.visualstudio.com/items?itemName=shyykoserhiy.vscode-spotify) plugin from [shyykoserhiy](https://github.com/ShyykoSerhiy/vscode-spotify).  
@@ -68,4 +82,4 @@ Please submit bug reports and feature requests at [Github](https://github.com/ar
 
 ## License
 
-[SpotifyRemote is released with MIT License](https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/master/LICENSE).
+[SpotifyRemote is released under the MIT License](https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/master/LICENSE).
