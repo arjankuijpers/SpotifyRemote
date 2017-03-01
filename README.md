@@ -2,11 +2,11 @@
 # SpotifyRemote
 ## For Visual Studio (2015/2017)
 
-
+License:
+![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)  
 Join the conversation on:
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/SpotifyRemoteForVisualStudio/Lobby#)  
-License:
-![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+Master: [![Build status](https://ci.appveyor.com/api/projects/status/nkoom7kwayhiolbx/branch/master?svg=true)](https://ci.appveyor.com/project/arjankuijpers/spotifyremote/branch/master)
 
 
 
@@ -67,7 +67,9 @@ And if your changes are stable it will be merged in the release version*
 - [x] Shows track title upon change.
 
 ### Planned
-- [ ] Settings in tools menu
+- [ ] Create better interface (update icons).
+- [ ] Hide Text of play control buttons when spotify is not active.
+- [ ] Settings in tools menu.
 - [ ] Awesome features people request.
 
 Do you miss a feature? Submit a request here: [Github](https://github.com/arjankuijpers/SpotifyRemote/issues)
