@@ -2,11 +2,11 @@
 # SpotifyRemote
 ## For Visual Studio (2015/2017)
 
-
+License:
+![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)  
 Join the conversation on:
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/SpotifyRemoteForVisualStudio/Lobby#)  
-License:
-![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+Master: [![Build status](https://ci.appveyor.com/api/projects/status/nkoom7kwayhiolbx/branch/master?svg=true)](https://ci.appveyor.com/project/arjankuijpers/spotifyremote/branch/master)
 
 
 
