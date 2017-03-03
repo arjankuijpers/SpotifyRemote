@@ -43,7 +43,7 @@ It will when you click a command and Spotify is not running.
  * Next
  * Previous  
 
-2. Showing track & Artist when it changing  
+2. Showing Track name & Artist when it changes.  
 
 *But that's not where it stops, See [Features](### Features) to so what is planned.*
 You can also make a feature request (at github).
