@@ -1,4 +1,5 @@
 <img src="https://github.com/arjankuijpers/SpotifyRemote/blob/master/VSIXSpotifyRemote/Resources/SpotifyRemoteLogo.png?raw=true" width="200">
+
 # SpotifyRemote
 ## For Visual Studio (2015/2017)
 
