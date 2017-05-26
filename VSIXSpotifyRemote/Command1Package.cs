@@ -94,7 +94,7 @@ namespace VSIXSpotifyRemote
            // m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
 
             spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
-            spotClient.Connect();
+            Debug.Assert(spotClient.Connect());
         }
 
         #region Package Members

@@ -1226,6 +1226,26 @@
             <returns></returns>
             <remarks>AUTH NEEDED</remarks>
         </member>
+        <member name="M:SpotifyAPI.Web.SpotifyWebAPI.GetUsersRecentlyPlayedTracks(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+                Get tracks from the current user’s recent play history.
+            </summary>
+            <param name="limit">The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. </param>
+            <param name="after">A Unix timestamp in milliseconds. Returns all items after (but not including) this cursor position. If after is specified, before must not be specified.</param>
+            <param name="before">A Unix timestamp in milliseconds. Returns all items before (but not including) this cursor position. If before is specified, after must not be specified.</param>
+            <returns></returns>
+            <remarks>AUTH NEEDED</remarks>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyWebAPI.GetUsersRecentlyPlayedTracksAsync(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+                Get tracks from the current user’s recent play history asynchronously
+            </summary>
+            <param name="limit">The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. </param>
+            <param name="after">A Unix timestamp in milliseconds. Returns all items after (but not including) this cursor position. If after is specified, before must not be specified.</param>
+            <param name="before">A Unix timestamp in milliseconds. Returns all items before (but not including) this cursor position. If before is specified, after must not be specified.</param>
+            <returns></returns>
+            <remarks>AUTH NEEDED</remarks>
+        </member>
         <member name="M:SpotifyAPI.Web.SpotifyWebAPI.GetUserPlaylists(System.String,System.Int32,System.Int32)">
             <summary>
                 Get a list of the playlists owned or followed by a Spotify user.
@@ -1934,6 +1954,16 @@
             medium_term (approximately last 6 months), short_term (approximately last 4 weeks). </param>
             <param name="limit">The number of entities to return. Default: 20. Minimum: 1. Maximum: 50</param>
             <param name="offest">The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities.</param>
+            <returns></returns>
+            <remarks>AUTH NEEDED</remarks>
+        </member>
+        <member name="M:SpotifyAPI.Web.SpotifyWebBuilder.GetUsersRecentlyPlayedTracks(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+                Get tracks from the current user’s recent play history.
+            </summary>
+            <param name="limit">The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. </param>
+            <param name="after">A Unix timestamp in milliseconds. Returns all items after (but not including) this cursor position. If after is specified, before must not be specified.</param>
+            <param name="before">A Unix timestamp in milliseconds. Returns all items before (but not including) this cursor position. If before is specified, after must not be specified.</param>
             <returns></returns>
             <remarks>AUTH NEEDED</remarks>
         </member>
