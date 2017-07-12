@@ -71,6 +71,11 @@
     <Compile Include="SettingsWindowControl.xaml.cs">
       <DependentUpon>SettingsWindowControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Triggers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Triggers.settings</DependentUpon>
+    </Compile>
     <Compile Include="UserPreferences.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -83,6 +88,10 @@
     <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Triggers.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Triggers.Designer.cs</LastGenOutput>
     </None>
     <None Include="UserPreferences.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
