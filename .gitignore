@@ -4,6 +4,8 @@
 
 !Newtonsoft.Json.dll
 !SpotifyAPI.dll
+!VSIXSpotifyRemote/deps/Debug/Newtonsoft.Json.dll
+!VSIXSpotifyRemote/deps/Release/SpotifyAPI.dll
 
 # User-specific files
 *.suo
