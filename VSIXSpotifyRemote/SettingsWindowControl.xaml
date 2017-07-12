@@ -8,25 +8,30 @@
              mc:Ignorable="d" d:DesignWidth="300"
              Name="MyToolWindow" Height="456">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Width="300">
+        <StackPanel HorizontalAlignment="Left" Width="300" Initialized="StackPanel_Initialized">
             <Label Content="SpotifyRemote Settings
                    " Background="{x:Null}" Foreground="#FFBAFFAB" FontSize="14" FontFamily="Segoe UI Light"/>
             <Grid Height="48">
                 <Label Content="Text visibility options" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontSize="11"/>
-                <RadioButton Content="Only show Spotify" HorizontalAlignment="Left" Margin="100,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" GroupName="TextVisibility"/>
-                <RadioButton Content="Show everything" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF"  FontSize="9" IsChecked="True" GroupName="TextVisibility"/>
-                <RadioButton Content="Hide everything" HorizontalAlignment="Left" Margin="198,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF"  FontSize="9" GroupName="TextVisibility"/>
+                <RadioButton x:Name="rb_tv1" Content="Only show Spotify" HorizontalAlignment="Left" Margin="100,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" GroupName="TextVisibility"/>
+                <RadioButton x:Name="rb_tv0" Content="Show everything" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF"  FontSize="9" IsChecked="True" GroupName="TextVisibility"/>
+                <RadioButton x:Name="rb_tv2" Content="Hide everything" HorizontalAlignment="Left" Margin="198,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF"  FontSize="9" GroupName="TextVisibility"/>
             </Grid>
             <Grid Height="64">
-                <CheckBox Content="Hide text if spotify is inactive" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" IsChecked="True"/>
+                <CheckBox x:Name="checkBox_hideText" Content="Hide text if spotify is inactive" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" IsChecked="True"/>
                 <Label Content="Hide button text" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="11"/>
-                <Label Content="text is hidden when spotify is inactive,&#xD;&#xA; only button graphics are visible." Foreground="White" FontSize="9" Margin="35,31,91,0"/>
+                <Label x:Name="label_hideText" Content="text is hidden when spotify is inactive,&#xD;&#xA; only button graphics are visible." Foreground="White" FontSize="9" Margin="35,31,91,0"/>
             </Grid>
-            
-            <Grid Height="71">
-                <CheckBox Content="Show track and artist on change." HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" IsChecked="True"/>
-                <CheckBox Content="Enable animation (decreases editor performance)" HorizontalAlignment="Left" Margin="17,46,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" IsChecked="True"/>
-                <Label Content="Interactive information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="11"/>
+
+            <Grid Height="84">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="31*"/>
+                    <ColumnDefinition Width="69*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="checkBox_ShowTrackArtist" Content="Show track and artist on change." HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" IsChecked="True" Grid.ColumnSpan="2"/>
+                <CheckBox x:Name="checkBox_enableInteractiveAnimation" Content="Enable animation (decreases editor performance)" HorizontalAlignment="Left" Margin="17,46,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" FontSize="9" IsChecked="True" Grid.ColumnSpan="2"/>
+                <Label Content="Interactive information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="11" Grid.ColumnSpan="2"/>
+                <Label x:Name="additionalInfoEnableAnimation" Content="may slowdown Visual Studio on lowend devices, &#xD;&#xA;when animation is playing. disable if you experience issues." Foreground="White" FontSize="9" Grid.ColumnSpan="2" Margin="35,53,15,-18"/>
             </Grid>
         </StackPanel>
 
