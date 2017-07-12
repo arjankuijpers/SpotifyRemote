@@ -108,9 +108,13 @@ namespace VSIXSpotifyRemote
             {
                 UserPreferences.Default.TextVisibility = 1;
             }
-            else
+            else if (rb_tv2.IsChecked ?? true)
             {
                 UserPreferences.Default.TextVisibility = 2;
+            }
+            else
+            {
+                System.Diagnostics.Debug.Assert(true, "Should never reach this condition.");
             }
 
             UserPreferences.Default.HideButtonTextOnInactive = checkBox_hideText.IsChecked ?? true;
