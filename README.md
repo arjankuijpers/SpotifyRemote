@@ -30,8 +30,8 @@ Master: [![Build status](https://ci.appveyor.com/api/projects/status/nkoom7kwayh
 
 ## Tips
 
-**Can it also start Spotify from Visual Studio?**  
-It will when you click a command and Spotify is not running.
+**Can it start Spotify from Visual Studio?**  
+It will, when you click a command and Spotify is not running.
 
 ## Frequent Asked Questions
 **Does it work on Visual Studio 2017?**  
