@@ -25,6 +25,7 @@ Master: [![Build status](https://ci.appveyor.com/api/projects/status/nkoom7kwayh
 3. Restart Visual Studio.
 4. Go to **view** *>* **Toolbars** and Select **SpotifyRemote**  
 <img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/master/VSIXSpotifyRemote/docs/enable_tb_from_view.png" width="350">  
+
 [Click here](https://github.com/arjankuijpers/SpotifyRemote/blob/master/VSIXSpotifyRemote/docs/enable_tb_from_view.png) for full sized screenshot
 
 ## Tips
