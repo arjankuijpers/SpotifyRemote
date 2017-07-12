@@ -120,6 +120,21 @@ namespace VSIXSpotifyRemote
             return false;
         }
 
+        public static bool CommandShouldShowWhenInactive()
+        {
+            return UserPreferences.Default.HideButtonTextOnInactive;
+        }
+
+        public static bool CommandShouldShowText()
+        {
+            return (UserPreferences.Default.TextVisibility == 0);
+        }
+
+        public static bool SpotifyCommandShouldShowText()
+        {
+            return ((UserPreferences.Default.TextVisibility == 2) ? false : true);
+        }
+
         #region Package Members
 
         /// <summary>

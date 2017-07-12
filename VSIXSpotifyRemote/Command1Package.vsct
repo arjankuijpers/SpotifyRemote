@@ -74,6 +74,7 @@
       <Button guid="guidCommand1PackageCmdSet" id="Command1Id" priority="0x0102" type="Button">
         <Parent guid="guidCommand1PackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
         <Icon guid="guidImages" id="bmpNext" />
         <Strings>
           <ButtonText>Spot Next</ButtonText>
@@ -83,6 +84,7 @@
       <Button guid="guidCommand1PackageCmdSet" id="cmdidCommand2" priority="0x0100" type="Button">
         <Parent guid="guidCommand1PackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
         <Icon guid="guidImages" id="bmpPrevious" />
         <Strings>
           <ButtonText>Spot Previous</ButtonText>
@@ -92,6 +94,7 @@
       <Button guid="guidCommand1PackageCmdSet" id="cmdidCommand3" priority="0x0101" type="Button">
         <Parent guid="guidCommand1PackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
         <Icon guid="guidImages" id="bmpPlay" />
         <Strings>
           <ButtonText>Spot Play/Pause</ButtonText>

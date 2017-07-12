@@ -171,6 +171,11 @@ namespace VSIXSpotifyRemote
         {
             SaveControlStatesToSettings();
         }
+
+        private void MyToolWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetControlsToSavedValues();
+        }
     }
 }
 

@@ -6,7 +6,7 @@
              Background="{DynamicResource VsBrush.Window}"
              Foreground="{DynamicResource VsBrush.WindowText}"
              mc:Ignorable="d" d:DesignWidth="300"
-             Name="MyToolWindow" Height="456">
+             Name="MyToolWindow" Height="456" Loaded="MyToolWindow_Loaded">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Width="300" Initialized="StackPanel_Initialized">
             <Label Content="SpotifyRemote Settings

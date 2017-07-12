@@ -85,7 +85,15 @@ namespace VSIXSpotifyRemote
                 //}
                 if(IsSpotifyProcessRunning())
                 {
-                    myOleCommand.Text = kSpotifyOpenString;
+                    if(Command1Package.SpotifyCommandShouldShowText())
+                    {
+                        myOleCommand.Text = kSpotifyOpenString;
+                    }
+                    else
+                    {
+                        myOleCommand.Text = " ";
+                    }
+                    
                 }
                 else
                 {
@@ -171,7 +179,14 @@ namespace VSIXSpotifyRemote
             if(!UserPreferences.Default.EnableInteractiveAnimation)
             {
                 timer = null;
-                myOleCommand.Text = kSpotifyOpenString;
+                if (Command1Package.SpotifyCommandShouldShowText())
+                {
+                    myOleCommand.Text = kSpotifyOpenString;
+                }
+                else
+                {
+                    myOleCommand.Text = " ";
+                }
                 return;
             }
 
@@ -190,12 +205,19 @@ namespace VSIXSpotifyRemote
         private void TimerAnimateOriginal(object sender, System.Timers.ElapsedEventArgs e)
         {
             
-            if(myOleCommand.Text.Length == kSpotifyOpenString.Length)
+            if(myOleCommand.Text.Length <= kSpotifyOpenString.Length)
             {
                 timer.Stop();
                 timer.Elapsed -= TimerAnimateOriginal;
                 timer = null;
-                myOleCommand.Text = kSpotifyOpenString;
+                if (Command1Package.SpotifyCommandShouldShowText())
+                {
+                    myOleCommand.Text = kSpotifyOpenString;
+                }
+                else
+                {
+                    myOleCommand.Text = " ";
+                }
             }
             else
             {
