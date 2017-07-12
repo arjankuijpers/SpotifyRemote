@@ -135,6 +135,28 @@ namespace VSIXSpotifyRemote
             return ((UserPreferences.Default.TextVisibility == 2) ? false : true);
         }
 
+
+        public static bool IsSpotifyProcessRunning()
+        {
+            Process[] retrevedProc = Process.GetProcessesByName("Spotify");
+            Process spotMain = null;
+            foreach (Process item in retrevedProc)
+            {
+                if (item.MainWindowTitle != "")
+                {
+                    spotMain = item;
+
+                    if (spotMain != null)
+                    {
+                        return true;
+                    }
+                    break;
+                }
+            }
+            return false;
+        }
+
+
         #region Package Members
 
         /// <summary>
