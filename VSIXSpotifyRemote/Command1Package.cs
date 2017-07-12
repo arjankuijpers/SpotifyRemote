@@ -18,6 +18,7 @@ using Microsoft.Win32;
 using EnvDTE80;
 using EnvDTE;
 
+
 namespace VSIXSpotifyRemote
 {
     /// <summary>
@@ -138,9 +139,9 @@ namespace VSIXSpotifyRemote
 
         public static bool IsSpotifyProcessRunning()
         {
-            Process[] retrevedProc = Process.GetProcessesByName("Spotify");
-            Process spotMain = null;
-            foreach (Process item in retrevedProc)
+            System.Diagnostics.Process[] retrevedProc = System.Diagnostics.Process.GetProcessesByName("Spotify");
+            System.Diagnostics.Process spotMain = null;
+            foreach (System.Diagnostics.Process item in retrevedProc)
             {
                 if (item.MainWindowTitle != "")
                 {
