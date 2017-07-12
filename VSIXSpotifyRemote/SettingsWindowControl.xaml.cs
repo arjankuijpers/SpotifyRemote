@@ -86,6 +86,15 @@ namespace VSIXSpotifyRemote
 
             checkBox_ShowTrackArtist.IsChecked = UserPreferences.Default.showTrackArtistOnChange;
             checkBox_enableInteractiveAnimation.IsChecked = UserPreferences.Default.EnableInteractiveAnimation;
+
+            if(checkBox_ShowTrackArtist.IsChecked ?? true)
+            {
+                checkBox_enableInteractiveAnimation.IsEnabled = true;
+            }
+            else
+            {
+                checkBox_enableInteractiveAnimation.IsEnabled = false;
+            }
         }
 
         public void SaveControlStatesToSettings()
@@ -121,6 +130,15 @@ namespace VSIXSpotifyRemote
             UserPreferences.Default.showTrackArtistOnChange = checkBox_ShowTrackArtist.IsChecked ?? true;
             UserPreferences.Default.EnableInteractiveAnimation = checkBox_enableInteractiveAnimation.IsChecked ?? true;
             UserPreferences.Default.Save();
+
+            if (checkBox_ShowTrackArtist.IsChecked ?? true)
+            {
+                checkBox_enableInteractiveAnimation.IsEnabled = true;
+            }
+            else
+            {
+                checkBox_enableInteractiveAnimation.IsEnabled = false;
+            }
         }
 
         private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
