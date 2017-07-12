@@ -69,9 +69,10 @@ And if your changes are stable it will be merged in the release version*
 - [x] Shows track title upon change.
 
 ### Planned
-- [ ] Create better interface (update icons).
+- [x] Create better interface (update icons).
 - [ ] Hide Text of play control buttons when spotify is not active.
 - [ ] Settings in tools menu.
+- [ ] Multiple themes.
 - [ ] Awesome features people request.
 
 Do you miss a feature? Submit a request here: [Github](https://github.com/arjankuijpers/SpotifyRemote/issues)
