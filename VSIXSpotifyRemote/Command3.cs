@@ -121,10 +121,12 @@ namespace VSIXSpotifyRemote
             sr = Command1Package.spotClient.GetStatus();
             if(!sr.Playing)
             {
+                Console.WriteLine("Spotify Play.");
                 Command1Package.spotClient.Play();
             }
             else
             {
+                Console.WriteLine("Spotify Pause.");
                 Command1Package.spotClient.Pause();
             }
         }

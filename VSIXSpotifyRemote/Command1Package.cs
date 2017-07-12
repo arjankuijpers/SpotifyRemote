@@ -90,14 +90,19 @@ namespace VSIXSpotifyRemote
             // not sited yet inside Visual Studio environment. The place to do all the other
             // initialization is the Initialize method.
 
-           // m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
-           // m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
+// m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
+// m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
+
+#if DEBUG
+            Console.WriteLine("SpotifyRemote Debug build.");
+#endif
 
             spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
-            Debug.Assert(spotClient.Connect());
+            bool connected = spotClient.Connect();
+            Debug.Assert(connected);
         }
 
-        #region Package Members
+#region Package Members
 
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
@@ -112,6 +117,6 @@ namespace VSIXSpotifyRemote
             Command4.Initialize(this);
         }
 
-        #endregion
+#endregion
     }
 }

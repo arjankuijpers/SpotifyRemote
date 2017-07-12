@@ -23,7 +23,11 @@ namespace VSIXSpotifyRemote
 
         private const int kSHOW_TRACK_INTERVAL = 5000; //Milliseconds
         private const int kANIMATE_SPOT_STRING = 125; //ms
-        private const string kSpotifyOpenString = "Open Spotify"; 
+#if DEBUG
+        private const string kSpotifyOpenString = "Open Spotify(D)";
+#else
+        private const string kSpotifyOpenString = "Open Spotify";
+#endif 
 
         /// <summary>
         /// Command ID.
@@ -69,10 +73,14 @@ namespace VSIXSpotifyRemote
                 //if (null != myOleCommand)
                 //{
                 //    myOleCommand.Text = "New Text";
-                //    //Microsoft.VisualStudio.Shell.ServiceProvider serviceProvider = new Microsoft.VisualStudio.Shell.ServiceProvider(((EnvDTE.DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE))) as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
-                //    //IVsUIShell uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
-                //    //uiShell.UpdateCommandUI(0);
+                //    
                 //}
+
+                myOleCommand.Text = kSpotifyOpenString;
+
+                Microsoft.VisualStudio.Shell.ServiceProvider serviceProvider = new Microsoft.VisualStudio.Shell.ServiceProvider(((EnvDTE.DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE))) as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
+                IVsUIShell uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
+                uiShell.UpdateCommandUI(0);
 
                 Command1Package.spotClient.OnTrackChange += SpotClient_OnTrackChange;
                 Command1Package.spotClient.ListenForEvents = true;
@@ -91,7 +99,10 @@ namespace VSIXSpotifyRemote
             string artistName = e.NewTrack.ArtistResource.Name;
             Console.WriteLine("Show New track name: " + trackName);
             myOleCommand.Text = String.Format("{0} - {1}", trackName, artistName);
-            if(timer != null)
+            Microsoft.VisualStudio.Shell.ServiceProvider serviceProvider = new Microsoft.VisualStudio.Shell.ServiceProvider(((EnvDTE.DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE))) as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
+            IVsUIShell uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
+            uiShell.UpdateCommandUI(0);
+            if (timer != null)
             {
                 timer.Stop();
                 timer.Start();
