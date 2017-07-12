@@ -21,8 +21,10 @@ namespace VSIXSpotifyRemote
     public partial class SettingsWindowControl : UserControl
     {
 
-        private string hideButtonTextHiddenActive = "text is hidden when spotify is inactive,&#xD;&#xA; only button graphics are visible.";
-        private string hideButtonTextHiddenInActive = "text is shown when spotify is inactive,&#xD;&#xA; button graphics and text are visible.";
+        bool initialized = false;
+
+        private string hideButtonTextHiddenActive = "text is hidden when spotify is inactive,\n only button graphics are visible.";
+        private string hideButtonTextHiddenInActive = "text is shown when spotify is inactive,\n button graphics and text are visible.";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindowControl"/> class.
@@ -35,8 +37,11 @@ namespace VSIXSpotifyRemote
         // On initialization set everything to the correct saved values.
         private void StackPanel_Initialized(object sender, System.EventArgs e)
         {
+
             UserPreferences.Default.Reload();
+            UserPreferences.Default.SettingChanging += Default_SettingChanging;
             SetControlsToSavedValues();
+            initialized = true;
         }
 
 
@@ -44,6 +49,12 @@ namespace VSIXSpotifyRemote
         public void SetControlsToSavedValues()
         {
             System.Console.WriteLine("Set Settings states to control states.");
+
+            if (!initialized)
+            {
+                System.Console.WriteLine("Not initialized yet.");
+                return;
+            }
 
             switch (UserPreferences.Default.TextVisibility)
             {
@@ -80,6 +91,14 @@ namespace VSIXSpotifyRemote
         public void SaveControlStatesToSettings()
         {
             System.Console.WriteLine("Save control states to settings.");
+            if (!initialized)
+            {
+                System.Console.WriteLine("Not initialized yet.");
+                return;
+            }
+
+
+            System.Console.WriteLine("Save control states to settings.");
 
             if (rb_tv0.IsChecked ?? true)
             {
@@ -98,14 +117,59 @@ namespace VSIXSpotifyRemote
             UserPreferences.Default.showTrackArtistOnChange = checkBox_ShowTrackArtist.IsChecked ?? true;
             UserPreferences.Default.EnableInteractiveAnimation = checkBox_enableInteractiveAnimation.IsChecked ?? true;
             UserPreferences.Default.Save();
-            UserPreferences.Default.SettingChanging += Default_SettingChanging;
-
         }
 
         private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
         {
-            System.Console.WriteLine("SettingsChanged reloaded to controls.");
+            //System.Console.WriteLine("SettingsChanged reloaded to controls.");
+            //SetControlsToSavedValues();
+        }
+
+        private void rb_tv0_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+        }
+
+        private void rb_tv1_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+        }
+
+        private void rb_tv2_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+        }
+
+        private void checkBox_hideText_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
             SetControlsToSavedValues();
+        }
+
+        private void checkBox_hideText_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+            SetControlsToSavedValues();
+        }
+
+        private void checkBox_ShowTrackArtist_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+        }
+
+        private void checkBox_ShowTrackArtist_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+        }
+
+        private void checkBox_enableInteractiveAnimation_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+        }
+
+        private void checkBox_enableInteractiveAnimation_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
         }
     }
 }

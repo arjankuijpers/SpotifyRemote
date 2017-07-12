@@ -35,7 +35,6 @@ namespace VSIXSpotifyRemote
         private const string kSpotifyStartString = "Start Spotify";
 #endif 
 
-
         public static Command4 gCommand4Instance;
 
         /// <summary>
@@ -130,6 +129,14 @@ namespace VSIXSpotifyRemote
 
         public void SpotClient_OnTrackChange(object sender, SpotifyAPI.Local.TrackChangeEventArgs e)
         {
+
+            if(!UserPreferences.Default.showTrackArtistOnChange)
+            {
+                Console.WriteLine("ShowTrackArtist is disabled in user preferences.");
+                return;
+            }
+
+
             string trackName = e.NewTrack.TrackResource.Name;
             string artistName = e.NewTrack.ArtistResource.Name;
             Console.WriteLine("Show New track name: " + trackName);
@@ -158,6 +165,17 @@ namespace VSIXSpotifyRemote
             Console.WriteLine("Set Command4 back to original String.");
             timer.Stop();
             timer.Elapsed -= TrackChangeTimerTick;
+
+            // set timer to null, and set string back to original spotify string.
+            // done if user disabled animation otherwise execute animation if it is not disabled with define NO_ANIM
+            if(!UserPreferences.Default.EnableInteractiveAnimation)
+            {
+                timer = null;
+                myOleCommand.Text = kSpotifyOpenString;
+                return;
+            }
+
+
 
 #if NO_ANIM
             timer = null;
