@@ -35,7 +35,6 @@ namespace VSIXSpotifyRemote
         private const string kSpotifyStartString = "Start Spotify";
 #endif 
 
-
         public static Command4 gCommand4Instance;
 
         /// <summary>
@@ -86,7 +85,15 @@ namespace VSIXSpotifyRemote
                 //}
                 if(IsSpotifyProcessRunning())
                 {
-                    myOleCommand.Text = kSpotifyOpenString;
+                    if(Command1Package.SpotifyCommandShouldShowText())
+                    {
+                        myOleCommand.Text = kSpotifyOpenString;
+                    }
+                    else
+                    {
+                        myOleCommand.Text = " ";
+                    }
+                    
                 }
                 else
                 {
@@ -130,6 +137,14 @@ namespace VSIXSpotifyRemote
 
         public void SpotClient_OnTrackChange(object sender, SpotifyAPI.Local.TrackChangeEventArgs e)
         {
+
+            if(!UserPreferences.Default.showTrackArtistOnChange)
+            {
+                Console.WriteLine("ShowTrackArtist is disabled in user preferences.");
+                return;
+            }
+
+
             string trackName = e.NewTrack.TrackResource.Name;
             string artistName = e.NewTrack.ArtistResource.Name;
             Console.WriteLine("Show New track name: " + trackName);
@@ -159,6 +174,24 @@ namespace VSIXSpotifyRemote
             timer.Stop();
             timer.Elapsed -= TrackChangeTimerTick;
 
+            // set timer to null, and set string back to original spotify string.
+            // done if user disabled animation otherwise execute animation if it is not disabled with define NO_ANIM
+            if(!UserPreferences.Default.EnableInteractiveAnimation)
+            {
+                timer = null;
+                if (Command1Package.SpotifyCommandShouldShowText())
+                {
+                    myOleCommand.Text = kSpotifyOpenString;
+                }
+                else
+                {
+                    myOleCommand.Text = " ";
+                }
+                return;
+            }
+
+
+
 #if NO_ANIM
             timer = null;
             myOleCommand.Text = kSpotifyOpenString;
@@ -172,12 +205,19 @@ namespace VSIXSpotifyRemote
         private void TimerAnimateOriginal(object sender, System.Timers.ElapsedEventArgs e)
         {
             
-            if(myOleCommand.Text.Length == kSpotifyOpenString.Length)
+            if(myOleCommand.Text.Length <= kSpotifyOpenString.Length)
             {
                 timer.Stop();
                 timer.Elapsed -= TimerAnimateOriginal;
                 timer = null;
-                myOleCommand.Text = kSpotifyOpenString;
+                if (Command1Package.SpotifyCommandShouldShowText())
+                {
+                    myOleCommand.Text = kSpotifyOpenString;
+                }
+                else
+                {
+                    myOleCommand.Text = " ";
+                }
             }
             else
             {

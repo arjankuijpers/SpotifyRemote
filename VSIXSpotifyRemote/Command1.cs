@@ -55,9 +55,18 @@ namespace VSIXSpotifyRemote
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
                 var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
-                commandService.AddCommand(menuItem);
+                //commandService.AddCommand(menuItem);
+
+                OleMenuCommand myOleCommand = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
+                if (!Command1Package.CommandShouldShowText())
+                {
+                    myOleCommand.Text = " ";
+                    
+                }
+                commandService.AddCommand(myOleCommand);
             }
 
+            
 
             
         }

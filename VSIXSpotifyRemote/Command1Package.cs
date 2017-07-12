@@ -42,6 +42,9 @@ namespace VSIXSpotifyRemote
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(Command1Package.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
+    [ProvideToolWindow(typeof(SettingsWindow))]
+    // --- Microsoft.VisualStudio.VSConstants.UICONTEXT_NoSolution
+    [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
     public sealed class Command1Package : Package
     {
         /// <summary>
@@ -117,6 +120,21 @@ namespace VSIXSpotifyRemote
             return false;
         }
 
+        public static bool CommandShouldShowWhenInactive()
+        {
+            return UserPreferences.Default.HideButtonTextOnInactive;
+        }
+
+        public static bool CommandShouldShowText()
+        {
+            return (UserPreferences.Default.TextVisibility == 0);
+        }
+
+        public static bool SpotifyCommandShouldShowText()
+        {
+            return ((UserPreferences.Default.TextVisibility == 2) ? false : true);
+        }
+
         #region Package Members
 
         /// <summary>
@@ -130,6 +148,7 @@ namespace VSIXSpotifyRemote
             Command2.Initialize(this);
             Command3.Initialize(this);
             Command4.Initialize(this);
+            SettingsWindowCommand.Initialize(this);
         }
 
 #endregion

@@ -33,6 +33,9 @@ namespace VSIXSpotifyRemote
         /// </summary>
         private readonly Package package;
 
+
+        private OleMenuCommand myOleCommand;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Command3"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
@@ -51,8 +54,22 @@ namespace VSIXSpotifyRemote
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
-                commandService.AddCommand(menuItem);
+               // var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
+                // commandService.AddCommand(menuItem);
+
+                myOleCommand = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
+                
+                if (!Command1Package.CommandShouldShowText())
+                {
+                    myOleCommand.Text = " ";
+                    
+                }
+
+                //Microsoft.VisualStudio.Shell.ServiceProvider serviceProvider = new Microsoft.VisualStudio.Shell.ServiceProvider(((EnvDTE.DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE))) as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
+                //IVsUIShell uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
+                //uiShell.UpdateCommandUI(0);
+
+                commandService.AddCommand(myOleCommand);
             }
         }
 
