@@ -27,7 +27,16 @@ namespace VSIXSpotifyRemote
         private const string kSpotifyOpenString = "Open Spotify(D)";
 #else
         private const string kSpotifyOpenString = "Open Spotify";
+#endif
+
+#if DEBUG
+        private const string kSpotifyStartString = "Start Spotify(D)";
+#else
+        private const string kSpotifyStartString = "Start Spotify";
 #endif 
+
+
+        public static Command4 gCommand4Instance;
 
         /// <summary>
         /// Command ID.
@@ -75,21 +84,47 @@ namespace VSIXSpotifyRemote
                 //    myOleCommand.Text = "New Text";
                 //    
                 //}
-
-                myOleCommand.Text = kSpotifyOpenString;
+                if(IsSpotifyProcessRunning())
+                {
+                    myOleCommand.Text = kSpotifyOpenString;
+                }
+                else
+                {
+                    myOleCommand.Text = kSpotifyStartString;
+                }
+                
 
                 Microsoft.VisualStudio.Shell.ServiceProvider serviceProvider = new Microsoft.VisualStudio.Shell.ServiceProvider(((EnvDTE.DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE))) as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
                 IVsUIShell uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
                 uiShell.UpdateCommandUI(0);
 
-                Command1Package.spotClient.OnTrackChange += SpotClient_OnTrackChange;
-                Command1Package.spotClient.ListenForEvents = true;
-
-                commandService.AddCommand(myOleCommand);
+                if(IsSpotifyProcessRunning())
+                {
+                    SpotClientRegisterTrackChange();
+                }
                 
 
+                commandService.AddCommand(myOleCommand);
+
+                gCommand4Instance = this;
             }
 
+            
+        }
+
+
+        public void SpotClientRegisterTrackChange()
+        {
+            if(Command1Package.spotClient != null)
+            {
+                Command1Package.spotClient.OnTrackChange += SpotClient_OnTrackChange;
+                Command1Package.spotClient.ListenForEvents = true;
+            }
+            else
+            {
+                Console.WriteLine("SpotClient is null reference, RegisterTrackChange!");
+                Debug.Assert(true, "SpotClient null reference.");
+            }
             
         }
 
@@ -240,6 +275,9 @@ namespace VSIXSpotifyRemote
                 if(!SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
                 {
                     SpotifyAPI.Local.SpotifyLocalAPI.RunSpotify();
+                    System.Threading.Thread.Sleep(200);
+                    Command1Package.SpotifyConnect();
+                    SpotClientRegisterTrackChange();
                 }
                 else
                 {
@@ -247,6 +285,26 @@ namespace VSIXSpotifyRemote
                         + "Spotify seems to be running but cant focus.");
                 }
             }
+        }
+
+        bool IsSpotifyProcessRunning()
+        {
+            Process[] retrevedProc = Process.GetProcessesByName("Spotify");
+            Process spotMain = null;
+            foreach (Process item in retrevedProc)
+            {
+                if (item.MainWindowTitle != "")
+                {
+                    spotMain = item;
+
+                    if(spotMain != null)
+                    {
+                        return true;
+                    }
+                    break;
+                }
+            }
+            return false;
         }
 
        

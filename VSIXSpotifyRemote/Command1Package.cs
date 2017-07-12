@@ -96,13 +96,28 @@ namespace VSIXSpotifyRemote
 #if DEBUG
             Console.WriteLine("SpotifyRemote Debug build.");
 #endif
+            SpotifyConnect();
 
-            spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
-            bool connected = spotClient.Connect();
-            Debug.Assert(connected);
+
         }
 
-#region Package Members
+
+        public static bool SpotifyConnect()
+        {
+            if (SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
+            {
+                spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
+                bool connected = spotClient.Connect();
+#if DEBUG
+                Console.WriteLine("Spotify Client Connected: {0}", connected);
+                Debug.Assert(connected);
+#endif          
+                return connected;
+            }
+            return false;
+        }
+
+        #region Package Members
 
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
@@ -119,4 +134,7 @@ namespace VSIXSpotifyRemote
 
 #endregion
     }
+
+    
+
 }

@@ -113,6 +113,9 @@ namespace VSIXSpotifyRemote
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
 #endif
                 SpotifyAPI.Local.SpotifyLocalAPI.RunSpotify();
+                System.Threading.Thread.Sleep(200);
+                Command1Package.SpotifyConnect();
+                Command4.gCommand4Instance.SpotClientRegisterTrackChange();
                 return;
             }
 
