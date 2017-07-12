@@ -107,6 +107,13 @@
           <ButtonText>Open Spotify</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidCommand1PackageCmdSet" id="cmdidSettingsWindowCommand" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
+        <Icon guid="guidImages1" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Spotify Settings</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -117,6 +124,7 @@
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
       <Bitmap guid="guidImages" href="Resources\Command1.png" usedList="bmpOpen, bmpPrevious, bmpNext, bmpPlay, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages1" href="Resources\SettingsWindowCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
   </Commands>
 
@@ -133,6 +141,7 @@
       <IDSymbol value="4177" name="cmdidCommand2" />
       <IDSymbol value="4178" name="cmdidCommand3" />
       <IDSymbol value="4179" name="cmdidCommand4" />
+      <IDSymbol value="4180" name="cmdidSettingsWindowCommand" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{ee8e0218-96e0-43ab-989b-5ffbeaade8f7}">
@@ -140,6 +149,15 @@
       <IDSymbol name="bmpPrevious" value="2" />
       <IDSymbol name="bmpNext" value="3" />
       <IDSymbol name="bmpPlay" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{7d015308-608d-485c-8da5-65e2bc131510}" name="guidImages1">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
       <IDSymbol name="bmpPicArrows" value="5" />
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
