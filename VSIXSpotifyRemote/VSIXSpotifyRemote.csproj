@@ -72,6 +72,11 @@
     <Compile Include="SettingsWindowControl.xaml.cs">
       <DependentUpon>SettingsWindowControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SpotifyRemotePlayListWindow.cs" />
+    <Compile Include="SpotifyRemotePlayListWindowCommand.cs" />
+    <Compile Include="SpotifyRemotePlayListWindowControl.xaml.cs">
+      <DependentUpon>SpotifyRemotePlayListWindowControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Triggers.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -113,6 +118,7 @@
     <Content Include="Resources\OpenSettingsCommand.png" />
     <Content Include="Resources\SettingsWindowCommand.png" />
     <Content Include="Resources\SpotifyRemoteLogo.ico" />
+    <Content Include="Resources\SpotifyRemotePlayListWindowCommand.png" />
     <Content Include="screenshot.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -277,6 +283,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="SettingsWindowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpotifyRemotePlayListWindowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

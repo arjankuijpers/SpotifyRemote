@@ -18,6 +18,10 @@ using Microsoft.Win32;
 using EnvDTE80;
 using EnvDTE;
 using Microsoft.VisualStudio.CommandBars;
+using SpotifyAPI.Web.Auth;
+using SpotifyAPI.Web.Enums;
+using SpotifyAPI.Web;
+using System.Windows.Forms;
 
 namespace VSIXSpotifyRemote
 {
@@ -46,6 +50,7 @@ namespace VSIXSpotifyRemote
     [ProvideToolWindow(typeof(SettingsWindow))]
     // --- Microsoft.VisualStudio.VSConstants.UICONTEXT_NoSolution
     [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
+    [ProvideToolWindow(typeof(SpotifyRemotePlayListWindow))]
     public sealed class Command1Package : Package
     {
         /// <summary>
@@ -103,6 +108,7 @@ namespace VSIXSpotifyRemote
         DTEEvents m_packageDTEEvents = null;
 
         public static SpotifyAPI.Local.SpotifyLocalAPI spotClient;
+        public static SpotifyAPI.Web.SpotifyWebAPI spotWeb;
         private static bool spotClientConnected = false;
         /// <summary>
         /// Initializes a new instance of the <see cref="Command1"/> class.
@@ -124,20 +130,26 @@ namespace VSIXSpotifyRemote
 
         public static bool GetSpotifyConnectionStatus()
         {
-           return spotClientConnected;
+            return spotClientConnected;
         }
 
         public static bool SpotifyConnect()
         {
             if (SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
             {
-                if(spotClient == null)
+                if (spotClient == null)
                 {
                     spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
                 }
-                
+
+                if (spotWeb == null)
+                {
+                    AuthenticateSpotifyWeb();
+                    MessageBox.Show(spotWeb.AccessToken);
+                }
+
                 bool connected = spotClient.Connect();
-                
+
 #if DEBUG
                 Console.WriteLine("Spotify Client Connected: {0}", connected);
                 Debug.Assert(connected);
@@ -188,7 +200,7 @@ namespace VSIXSpotifyRemote
 
         public static void UpdateCommandsHiddenState()
         {
-            if(Command1.Instance == null || Command2.Instance == null || Command3.Instance == null)
+            if (Command1.Instance == null || Command2.Instance == null || Command3.Instance == null)
             {
                 return;
             }
@@ -197,6 +209,39 @@ namespace VSIXSpotifyRemote
             Command2.Instance.UpdateTextHiddenState();
             Command3.Instance.UpdateTextHiddenState();
         }
+
+        public async static void AuthenticateSpotifyWeb()
+        {
+
+            WebAPIFactory webApiFactory = new WebAPIFactory(
+                 "http://localhost",
+                 8000,
+                 "3a922edff6af43e9be7abb98cf217220",
+                 Scope.UserReadPrivate | Scope.PlaylistReadPrivate | Scope.UserLibraryRead | Scope.UserReadRecentlyPlayed | Scope.UserTopRead,
+                 TimeSpan.FromSeconds(20)
+            );
+
+            try
+            {
+                //This will open the user's browser and returns once
+                //the user is authorized.
+                spotWeb = await webApiFactory.GetWebApi();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            if (spotWeb == null)
+                return ;
+
+            return;
+
+        }
+
+
+
+
 
         #region Package Members
 
@@ -220,6 +265,7 @@ namespace VSIXSpotifyRemote
             m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
             m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
             m_packageDTEEvents.OnStartupComplete += M_packageDTEEvents_OnStartupComplete;
+            SpotifyRemotePlayListWindowCommand.Initialize(this);
         }
 
         private void M_packageDTEEvents_OnStartupComplete()
@@ -227,9 +273,10 @@ namespace VSIXSpotifyRemote
             OnExtensionReady();
         }
 
+
         #endregion
     }
 
-    
+
 
 }

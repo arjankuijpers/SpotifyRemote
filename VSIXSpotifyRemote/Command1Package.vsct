@@ -130,6 +130,13 @@
           <ButtonText>Open SpotifyRemote Settings</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidCommand1PackageCmdSet" id="cmdidSpotifyRemotePlayListWindowCommand" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
+        <Icon guid="guidImages3" id="bmpPic1" />
+        <Strings>
+          <ButtonText>SpotifyRemotePlayListWindow</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -142,6 +149,7 @@
       <Bitmap guid="guidImages" href="Resources\Command1.png" usedList="bmpOpen, bmpPrevious, bmpNext, bmpPlay, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages1" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages2" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages3" href="Resources\SpotifyRemotePlayListWindowCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
   </Commands>
 
@@ -160,6 +168,7 @@
       <IDSymbol value="4179" name="cmdidCommand4" />
       <IDSymbol value="4180" name="cmdidSettingsWindowCommand" />
       <IDSymbol value="4181" name="cmdidOpenSettingsCommand" />
+      <IDSymbol value="4182" name="cmdidSpotifyRemotePlayListWindowCommand" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{ee8e0218-96e0-43ab-989b-5ffbeaade8f7}">
@@ -181,6 +190,15 @@
     </GuidSymbol>
   
     <GuidSymbol value="{64a4bcc2-9a93-448f-a1d2-9e9b7ceb2d95}" name="guidImages2">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{7993f361-1988-4727-b98a-d5abfb0d6ee0}" name="guidImages3">
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />
