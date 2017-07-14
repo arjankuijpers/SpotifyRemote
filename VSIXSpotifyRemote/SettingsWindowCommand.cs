@@ -32,6 +32,10 @@ namespace VSIXSpotifyRemote
         /// </summary>
         private readonly Package package;
 
+
+        public static SettingsWindowCommand swc;
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindowCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
@@ -53,6 +57,9 @@ namespace VSIXSpotifyRemote
                 var menuItem = new MenuCommand(this.ShowToolWindow, menuCommandID);
                 commandService.AddCommand(menuItem);
             }
+
+
+            swc = this;
         }
 
         /// <summary>
@@ -103,5 +110,13 @@ namespace VSIXSpotifyRemote
             IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
+
+
+
+        public void ShowSettings()
+        {
+            ShowToolWindow(this, null);
+        }
+
     }
 }
