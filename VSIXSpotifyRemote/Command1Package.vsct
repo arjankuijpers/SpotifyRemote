@@ -21,21 +21,26 @@
 
   <!--This header contains the command ids for the menus provided by the shell. -->
   <Extern href="vsshlids.h" />
+  
+  
+  
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
   <Commands package="guidCommand1Package">
-
-
     <Menus>
       <Menu guid="guidCommand1PackageCmdSet" id="Toolbar" type="Toolbar">
         <CommandFlag>DefaultDocked</CommandFlag>
+        <CommandFlag>AlwaysCreate</CommandFlag>
+        <CommandFlag>NoCustomize</CommandFlag>
         <Strings>
           <ButtonText>Spotify Toolbar</ButtonText>
           <CommandName>Spotify Toolbar</CommandName>
         </Strings>
       </Menu>
     </Menus>
+
+    
     
     
     <!-- Inside this section we have different sub-sections: one for the menus, another
@@ -52,6 +57,7 @@
          must be a menu. -->
     <Groups>
       <Group guid="guidCommand1PackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS" />
       </Group>
 
@@ -183,4 +189,11 @@
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
   </Symbols>
+
+
+  <VisibilityConstraints>
+
+    <VisibilityItem guid="guidCommand1PackageCmdSet" id="Toolbar" context="UICONTEXT_NoSolution" />
+  </VisibilityConstraints>
+
 </CommandTable>

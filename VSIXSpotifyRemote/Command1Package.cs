@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.Win32;
 using EnvDTE80;
 using EnvDTE;
-
+using Microsoft.VisualStudio.CommandBars;
 
 namespace VSIXSpotifyRemote
 {
@@ -79,6 +79,8 @@ namespace VSIXSpotifyRemote
             spotClient.Dispose();
         }
 
+
+
         private DTE2 m_applicationObject = null;
         DTEEvents m_packageDTEEvents = null;
 
@@ -94,8 +96,8 @@ namespace VSIXSpotifyRemote
             // not sited yet inside Visual Studio environment. The place to do all the other
             // initialization is the Initialize method.
 
-// m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
-// m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
+            // m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
+            // m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
 
 #if DEBUG
             Console.WriteLine("SpotifyRemote Debug build.");
