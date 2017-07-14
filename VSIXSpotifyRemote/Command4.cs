@@ -5,13 +5,12 @@
 //------------------------------------------------------------------------------
 //#define NO_ANIM
 
-using System;
-using System.ComponentModel.Design;
-using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.OLE;
+using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace VSIXSpotifyRemote
 {
@@ -20,7 +19,6 @@ namespace VSIXSpotifyRemote
     /// </summary>
     internal sealed class Command4
     {
-
         private const int kSHOW_TRACK_INTERVAL = 5000; //Milliseconds
         private const int kANIMATE_SPOT_STRING = 125; //ms
 #if DEBUG
@@ -33,7 +31,7 @@ namespace VSIXSpotifyRemote
         private const string kSpotifyStartString = "Start Spotify(D)";
 #else
         private const string kSpotifyStartString = "Start Spotify";
-#endif 
+#endif
 
         public static Command4 gCommand4Instance;
 
@@ -47,14 +45,15 @@ namespace VSIXSpotifyRemote
         /// </summary>
         public static readonly Guid CommandSet = new Guid("2599fe4a-622d-4cdc-8a4d-a08560938c54");
 
-
         private OleMenuCommand myOleCommand;
 
         /// <summary>
         /// VS Package that provides this command, not null.
         /// </summary>
         private readonly Package package;
+
         internal System.Timers.Timer timer;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Command4"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
@@ -73,19 +72,19 @@ namespace VSIXSpotifyRemote
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-               
-               // var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
+
+                // var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
 
                 myOleCommand = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
 
                 //if (null != myOleCommand)
                 //{
                 //    myOleCommand.Text = "New Text";
-                //    
+                //
                 //}
-                if(IsSpotifyProcessRunning())
+                if (IsSpotifyProcessRunning())
                 {
-                    if(Command1Package.SpotifyCommandShouldShowText())
+                    if (Command1Package.SpotifyCommandShouldShowText())
                     {
                         myOleCommand.Text = kSpotifyOpenString;
                     }
@@ -93,36 +92,37 @@ namespace VSIXSpotifyRemote
                     {
                         myOleCommand.Text = " ";
                     }
-                    
                 }
                 else
                 {
-                    myOleCommand.Text = kSpotifyStartString;
+                    if (UserPreferences.Default.HideButtonTextOnInactive)
+                    {
+                        myOleCommand.Text = " ";
+                    }
+                    else
+                    {
+                        myOleCommand.Text = kSpotifyStartString;
+                    }
                 }
-                
 
                 Microsoft.VisualStudio.Shell.ServiceProvider serviceProvider = new Microsoft.VisualStudio.Shell.ServiceProvider(((EnvDTE.DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(EnvDTE.DTE))) as Microsoft.VisualStudio.OLE.Interop.IServiceProvider);
                 IVsUIShell uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
                 uiShell.UpdateCommandUI(0);
 
-                if(IsSpotifyProcessRunning())
+                if (IsSpotifyProcessRunning())
                 {
                     SpotClientRegisterTrackChange();
                 }
-                
 
                 commandService.AddCommand(myOleCommand);
 
                 gCommand4Instance = this;
             }
-
-            
         }
-
 
         public void SpotClientRegisterTrackChange()
         {
-            if(Command1Package.spotClient != null)
+            if (Command1Package.spotClient != null)
             {
                 Command1Package.spotClient.OnTrackChange += SpotClient_OnTrackChange;
                 Command1Package.spotClient.ListenForEvents = true;
@@ -132,18 +132,15 @@ namespace VSIXSpotifyRemote
                 Console.WriteLine("SpotClient is null reference, RegisterTrackChange!");
                 Debug.Assert(true, "SpotClient null reference.");
             }
-            
         }
 
         public void SpotClient_OnTrackChange(object sender, SpotifyAPI.Local.TrackChangeEventArgs e)
         {
-
-            if(!UserPreferences.Default.showTrackArtistOnChange)
+            if (!UserPreferences.Default.showTrackArtistOnChange)
             {
                 Console.WriteLine("ShowTrackArtist is disabled in user preferences.");
                 return;
             }
-
 
             string trackName = e.NewTrack.TrackResource.Name;
             string artistName = e.NewTrack.ArtistResource.Name;
@@ -164,8 +161,6 @@ namespace VSIXSpotifyRemote
                 timer.Elapsed += TrackChangeTimerTick;
                 timer.Start();
             }
-            
-
         }
 
         private void TrackChangeTimerTick(object sender, System.Timers.ElapsedEventArgs e)
@@ -176,7 +171,7 @@ namespace VSIXSpotifyRemote
 
             // set timer to null, and set string back to original spotify string.
             // done if user disabled animation otherwise execute animation if it is not disabled with define NO_ANIM
-            if(!UserPreferences.Default.EnableInteractiveAnimation)
+            if (!UserPreferences.Default.EnableInteractiveAnimation)
             {
                 timer = null;
                 if (Command1Package.SpotifyCommandShouldShowText())
@@ -190,8 +185,6 @@ namespace VSIXSpotifyRemote
                 return;
             }
 
-
-
 #if NO_ANIM
             timer = null;
             myOleCommand.Text = kSpotifyOpenString;
@@ -204,8 +197,7 @@ namespace VSIXSpotifyRemote
 
         private void TimerAnimateOriginal(object sender, System.Timers.ElapsedEventArgs e)
         {
-            
-            if(myOleCommand.Text.Length <= kSpotifyOpenString.Length)
+            if (myOleCommand.Text.Length <= kSpotifyOpenString.Length)
             {
                 timer.Stop();
                 timer.Elapsed -= TimerAnimateOriginal;
@@ -231,8 +223,6 @@ namespace VSIXSpotifyRemote
                 }
             }
         }
-
-
 
         /// <summary>
         /// Gets the instance of the command.
@@ -293,31 +283,31 @@ namespace VSIXSpotifyRemote
 
             //myOleCommand.Text = "Test.";
 
-
             Process[] retrevedProc = Process.GetProcessesByName("Spotify");
             Process spotMain = null;
             foreach (Process item in retrevedProc)
             {
-                if(item.MainWindowTitle != "")
+                if (item.MainWindowTitle != "")
                 {
                     spotMain = item;
                     break;
                 }
             }
 
-            if(spotMain != null)
+            if (spotMain != null)
             {
                 WindowHelper.BringProcessToFront(spotMain);
             }
             else
             {
                 Console.WriteLine("Spotify not running.");
-                if(!SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
+                if (!SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
                 {
                     SpotifyAPI.Local.SpotifyLocalAPI.RunSpotify();
-                    System.Threading.Thread.Sleep(200);
+                    System.Threading.Thread.Sleep(300);
                     Command1Package.SpotifyConnect();
                     SpotClientRegisterTrackChange();
+                    Command1Package.UpdateCommandsHiddenState();
                 }
                 else
                 {
@@ -327,7 +317,7 @@ namespace VSIXSpotifyRemote
             }
         }
 
-        bool IsSpotifyProcessRunning()
+        private bool IsSpotifyProcessRunning()
         {
             Process[] retrevedProc = Process.GetProcessesByName("Spotify");
             Process spotMain = null;
@@ -337,7 +327,7 @@ namespace VSIXSpotifyRemote
                 {
                     spotMain = item;
 
-                    if(spotMain != null)
+                    if (spotMain != null)
                     {
                         return true;
                     }
@@ -346,13 +336,8 @@ namespace VSIXSpotifyRemote
             }
             return false;
         }
-
-       
     }
-
-
 }
-
 
 public static class WindowHelper
 {
@@ -367,12 +352,14 @@ public static class WindowHelper
         SetForegroundWindow(handle);
     }
 
-    const int SW_RESTORE = 9;
+    private const int SW_RESTORE = 9;
 
     [System.Runtime.InteropServices.DllImport("User32.dll")]
     private static extern bool SetForegroundWindow(IntPtr handle);
+
     [System.Runtime.InteropServices.DllImport("User32.dll")]
     private static extern bool ShowWindow(IntPtr handle, int nCmdShow);
+
     [System.Runtime.InteropServices.DllImport("User32.dll")]
     private static extern bool IsIconic(IntPtr handle);
 }

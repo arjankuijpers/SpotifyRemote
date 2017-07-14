@@ -84,6 +84,7 @@ namespace VSIXSpotifyRemote
 #if DEBUG
             Triggers.Default.SettingsShownOnce = false;
 #endif
+            UpdateCommandsHiddenState();
 
             // Check for first time opening since installing the extension.
             if (!Triggers.Default.SettingsShownOnce)
@@ -185,6 +186,17 @@ namespace VSIXSpotifyRemote
             return false;
         }
 
+        public static void UpdateCommandsHiddenState()
+        {
+            if(Command1.Instance == null || Command2.Instance == null || Command3.Instance == null)
+            {
+                return;
+            }
+
+            Command1.Instance.UpdateTextHiddenState();
+            Command2.Instance.UpdateTextHiddenState();
+            Command3.Instance.UpdateTextHiddenState();
+        }
 
         #region Package Members
 

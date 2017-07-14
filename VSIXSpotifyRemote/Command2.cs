@@ -34,6 +34,13 @@ namespace VSIXSpotifyRemote
         /// </summary>
         private readonly Package package;
 
+
+
+        private OleMenuCommand buttonMenuCommand;
+
+
+        private string commandText = "Previous";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Command2"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
@@ -56,6 +63,7 @@ namespace VSIXSpotifyRemote
                 //commandService.AddCommand(menuItem);
 
                 OleMenuCommand myOleCommand = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
+                buttonMenuCommand = myOleCommand;
                 if (!Command1Package.CommandShouldShowText())
                 {
                     myOleCommand.Text = " ";
@@ -121,15 +129,33 @@ namespace VSIXSpotifyRemote
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
 #endif
                 SpotifyAPI.Local.SpotifyLocalAPI.RunSpotify();
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(300);
                 Command1Package.SpotifyConnect();
                 Command4.gCommand4Instance.SpotClientRegisterTrackChange();
+                Command1Package.UpdateCommandsHiddenState();
                 return;
             }
 
 
             // Previous
             Command1Package.spotClient.Previous();
+        }
+
+        public void UpdateTextHiddenState()
+        {
+            if (!Command1Package.SpotifyCommandShouldShowText() && !UserPreferences.Default.HideButtonTextOnInactive)
+            {
+                return;
+            }
+
+            if (!Command1Package.IsSpotifyProcessRunning())
+            {
+                buttonMenuCommand.Text = " ";
+            }
+            else
+            {
+                buttonMenuCommand.Text = commandText;
+            }
         }
     }
 }
