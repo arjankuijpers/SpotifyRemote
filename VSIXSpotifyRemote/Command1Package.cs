@@ -172,6 +172,7 @@ namespace VSIXSpotifyRemote
             Command3.Initialize(this);
             Command4.Initialize(this);
             SettingsWindowCommand.Initialize(this);
+            OpenSettingsCommand.Initialize(this);
         }
 
 #endregion
