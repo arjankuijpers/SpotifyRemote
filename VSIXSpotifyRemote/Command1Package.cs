@@ -79,13 +79,30 @@ namespace VSIXSpotifyRemote
             spotClient.Dispose();
         }
 
+        public void OnExtensionReady()
+        {
+#if DEBUG
+            Triggers.Default.SettingsShownOnce = false;
+#endif
+
+            // Check for first time opening since installing the extension.
+            if (!Triggers.Default.SettingsShownOnce)
+            {
+                Console.WriteLine("Show settings, first time.");
+                Triggers.Default.SettingsShownOnce = true;
+                Triggers.Default.Save();
+
+                SettingsWindowCommand.swc.ShowSettings();
+            }
+        }
+
 
 
         private DTE2 m_applicationObject = null;
         DTEEvents m_packageDTEEvents = null;
 
         public static SpotifyAPI.Local.SpotifyLocalAPI spotClient;
-
+        private static bool spotClientConnected = false;
         /// <summary>
         /// Initializes a new instance of the <see cref="Command1"/> class.
         /// </summary>
@@ -96,32 +113,41 @@ namespace VSIXSpotifyRemote
             // not sited yet inside Visual Studio environment. The place to do all the other
             // initialization is the Initialize method.
 
-            // m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
-            // m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
 
 #if DEBUG
             Console.WriteLine("SpotifyRemote Debug build.");
 #endif
             SpotifyConnect();
 
-
         }
 
+        public static bool GetSpotifyConnectionStatus()
+        {
+           return spotClientConnected;
+        }
 
         public static bool SpotifyConnect()
         {
             if (SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
             {
-                spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
+                if(spotClient == null)
+                {
+                    spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
+                }
+                
                 bool connected = spotClient.Connect();
+                
 #if DEBUG
                 Console.WriteLine("Spotify Client Connected: {0}", connected);
                 Debug.Assert(connected);
 #endif          
+                spotClientConnected = connected;
                 return connected;
             }
+            spotClientConnected = false;
             return false;
         }
+
 
         public static bool CommandShouldShowWhenInactive()
         {
@@ -168,16 +194,28 @@ namespace VSIXSpotifyRemote
         /// </summary>
         protected override void Initialize()
         {
-            Command1.Initialize(this);
             base.Initialize();
+
+            SettingsWindowCommand.Initialize(this);
+            OpenSettingsCommand.Initialize(this);
+            Command1.Initialize(this);
             Command2.Initialize(this);
             Command3.Initialize(this);
             Command4.Initialize(this);
-            SettingsWindowCommand.Initialize(this);
-            OpenSettingsCommand.Initialize(this);
+
+
+
+            m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
+            m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
+            m_packageDTEEvents.OnStartupComplete += M_packageDTEEvents_OnStartupComplete;
         }
 
-#endregion
+        private void M_packageDTEEvents_OnStartupComplete()
+        {
+            OnExtensionReady();
+        }
+
+        #endregion
     }
 
     
