@@ -141,6 +141,19 @@ namespace VSIXSpotifyRemote
             Command1Package.spotClient.Previous();
         }
 
+        public void SetStartupCommandTextState()
+        {
+            if (!Command1Package.CommandShouldShowText())
+            {
+                buttonMenuCommand.Text = " ";
+
+            }
+            else
+            {
+                buttonMenuCommand.Text = commandText;
+            }
+        }
+
         public void UpdateTextHiddenState()
         {
             if (!Command1Package.SpotifyCommandShouldShowText() && !UserPreferences.Default.HideButtonTextOnInactive)

@@ -120,6 +120,26 @@ namespace VSIXSpotifyRemote
             }
         }
 
+        public void SetStartupCommandTextState()
+        {
+            if (!Command1Package.SpotifyCommandShouldShowText())
+            {
+                myOleCommand.Text = " ";
+
+            }
+            else
+            {
+                if (IsSpotifyProcessRunning())
+                {
+                    myOleCommand.Text = kSpotifyOpenString;
+                }
+                else
+                {
+                    myOleCommand.Text = kSpotifyStartString;
+                }
+            }
+        }
+
         public void SpotClientRegisterTrackChange()
         {
             if (Command1Package.spotClient != null)

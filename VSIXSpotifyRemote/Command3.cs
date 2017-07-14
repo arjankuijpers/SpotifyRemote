@@ -153,6 +153,19 @@ namespace VSIXSpotifyRemote
             }
         }
 
+        public void SetStartupCommandTextState()
+        {
+            if (!Command1Package.CommandShouldShowText())
+            {
+                myOleCommand.Text = " ";
+
+            }
+            else
+            {
+                myOleCommand.Text = commandText;
+            }
+        }
+
         public void UpdateTextHiddenState()
         {
             if (!Command1Package.SpotifyCommandShouldShowText() && !UserPreferences.Default.HideButtonTextOnInactive)

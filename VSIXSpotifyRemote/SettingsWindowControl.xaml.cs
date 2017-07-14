@@ -109,6 +109,7 @@ namespace VSIXSpotifyRemote
 
             System.Console.WriteLine("Save control states to settings.");
 
+           
             if (rb_tv0.IsChecked ?? true)
             {
                 UserPreferences.Default.TextVisibility = 0;
@@ -130,6 +131,8 @@ namespace VSIXSpotifyRemote
             UserPreferences.Default.showTrackArtistOnChange = checkBox_ShowTrackArtist.IsChecked ?? true;
             UserPreferences.Default.EnableInteractiveAnimation = checkBox_enableInteractiveAnimation.IsChecked ?? true;
             UserPreferences.Default.Save();
+
+            UpdateTextHiddenStates();
 
             if (checkBox_ShowTrackArtist.IsChecked ?? true)
             {
@@ -197,6 +200,14 @@ namespace VSIXSpotifyRemote
         private void MyToolWindow_Loaded(object sender, RoutedEventArgs e)
         {
             SetControlsToSavedValues();
+        }
+
+        private void UpdateTextHiddenStates()
+        {
+            Command1.Instance.SetStartupCommandTextState();
+            Command2.Instance.SetStartupCommandTextState();
+            Command3.Instance.SetStartupCommandTextState();
+            Command4.Instance.SetStartupCommandTextState();
         }
     }
 }
