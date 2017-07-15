@@ -106,11 +106,16 @@ namespace VSIXSpotifyRemote
 
         }
 
-        void RetreiveTracksFromWeb(string playListId)
+        bool RetreiveTracksFromWeb(string playListId)
         {
             listTracksFromPL.Clear();
             Paging<PlaylistTrack> pagingTracks = Command1Package.spotWeb.GetPlaylistTracks(userId, playListId, "", 900, 0, "");
+            if(pagingTracks.Items == null)
+            {
+                return false;
+            }
             listTracksFromPL.AddRange(pagingTracks.Items);
+            return true;
             
 
         }
@@ -118,6 +123,11 @@ namespace VSIXSpotifyRemote
         void ShowPlayListsInView()
         {
             lvm = ListViewMode.kPlayList;
+            ReturnPlaylists.Visibility = Visibility.Collapsed;
+            LabelPlayPlayList.Visibility = Visibility.Collapsed;
+            RecalculateListView();
+
+
             //var gridView = new GridView();
             //listView.View = gridView;
             for (int i = 0; i < playListNames.Count; i++)
@@ -150,6 +160,10 @@ namespace VSIXSpotifyRemote
         void ShowTracksInListView()
         {
             lvm = ListViewMode.kTrackList;
+            ReturnPlaylists.Visibility = Visibility.Visible;
+            LabelPlayPlayList.Visibility = Visibility.Visible;
+            RecalculateListView();
+
 
             //var gridView = new GridView();
             //listView.View = gridView;
@@ -185,9 +199,17 @@ namespace VSIXSpotifyRemote
         {
             if(lvm == ListViewMode.kPlayList)
             {
-                listView.Items.Clear();
-                RetreiveTracksFromWeb(playListId[((PlayList.SpotPlayListLabel)e.Source).playlistId]);
-                ShowTracksInListView();
+                
+                bool successful = RetreiveTracksFromWeb(playListId[((PlayList.SpotPlayListLabel)e.Source).playlistId]);
+                if(successful)
+                {
+                    listView.Items.Clear();
+                    ShowTracksInListView();
+                }
+                else
+                {
+                    MessageBox.Show("Sorry couldn't show your playlist songs.\nTry again later.");
+                }
             }
             else
             {
@@ -277,7 +299,25 @@ namespace VSIXSpotifyRemote
 
         private void PlayListWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            listView.Height = this.ActualHeight - WindowTitle.ActualHeight;
+            RecalculateListView();
+        }
+
+        private void RecalculateListView()
+        {
+            if (lvm == ListViewMode.kPlayList)
+            {
+                listView.Height = this.ActualHeight - WindowTitle.ActualHeight;
+            }
+            else
+            {
+                listView.Height = (this.ActualHeight - WindowTitle.ActualHeight) - ReturnPlaylists.ActualHeight;
+            }
+        }
+
+        private void ReturnPlaylists_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            listView.Items.Clear();
+            ShowPlayListsInView();
         }
     }
 }

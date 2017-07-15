@@ -12,6 +12,10 @@
         <StackPanel Orientation="Vertical">
 
             <Label Name="WindowTitle" Content="SpotifyRemote playlists" Background="#FF252526" Foreground="#FFBAFFAB" FontSize="20" FontFamily="Segoe UI Light" Panel.ZIndex="10"/>
+            <StackPanel Orientation="Horizontal" Background="#FF252526">
+                <Label Name="ReturnPlaylists" Content="[ Return to playlists ]" Background="#FF252526" Foreground="#FFBAFFAB" FontSize="12" FontFamily="Segoe UI Light" Panel.ZIndex="11" Height="26" MouseUp="ReturnPlaylists_MouseUp"/>
+                <Label Name="LabelPlayPlayList" Content="[ Play ]" Background="#FF252526" Foreground="#FFBAFFAB" FontSize="12" FontFamily="Segoe UI Light" Panel.ZIndex="11" Height="26" MouseUp="ReturnPlaylists_MouseUp"/>
+            </StackPanel>
             <ListView x:Name="listView" Background="#FF2D2D30" RenderTransformOrigin="0.5,0.5" SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="listView_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="262" ScrollViewer.VerticalScrollBarVisibility="Visible" Foreground="#FFABFFFF" FontFamily="Segoe UI Light">
                 <ListView.View>
                     <GridView>
