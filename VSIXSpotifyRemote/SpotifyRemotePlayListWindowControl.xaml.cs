@@ -248,8 +248,8 @@ namespace VSIXSpotifyRemote
         }
         void PlayPlayListUri(string playListUri)
         {
-            Command1Package.spotClient.PlayURL(playListUri);
 
+            Command1Package.spotClient.PlayURL(playListUri);
         }
 
 

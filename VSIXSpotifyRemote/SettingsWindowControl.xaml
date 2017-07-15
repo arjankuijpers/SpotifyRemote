@@ -22,6 +22,11 @@
                 <Label Content="Hide button text" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
                 <Label x:Name="label_hideText" Content="text is hidden when spotify is inactive,&#xD;&#xA; only button graphics are visible." Foreground="White" FontSize="11" Margin="40,41,86,-10"/>
             </Grid>
+            <Grid Height="98">
+                <CheckBox x:Name="checkBox_showPlayListButton" Content="Show Playlist button in toolbar" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Foreground="#FFABFFFF" IsChecked="True" Checked="checkBox_showPlayListButton_Checked" Unchecked="checkBox_showPlayListButton_Unchecked"/>
+                <Label Content="Show playlist button" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                <Label x:Name="label_showPlaylistButton" Content="button is shown in the toolbar." Foreground="White" FontSize="11" Margin="40,41,86,-10"/>
+            </Grid>
 
             <Grid Height="98">
                 <Grid.ColumnDefinitions>

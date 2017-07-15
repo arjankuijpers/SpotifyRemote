@@ -57,7 +57,10 @@ namespace VSIXSpotifyRemote
 
                 oleMenuCommand = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
                 oleMenuCommand.Enabled = true;
-                oleMenuCommand.Visible = false;
+                if(!UserPreferences.Default.ShowOpenPlayListButton)
+                {
+                    oleMenuCommand.Visible = false;
+                }
 
                 commandService.AddCommand(oleMenuCommand);
 

@@ -26,6 +26,9 @@ namespace VSIXSpotifyRemote
         private string hideButtonTextHiddenActive = "text is hidden when spotify is inactive,\n only button graphics are visible.";
         private string hideButtonTextHiddenInActive = "text is shown when spotify is inactive,\n button graphics and text are visible.";
 
+        private string showPlayListButtonShown = "button is shown in the toolbar.";
+        private string showPlayListButtonHidden = "button is not visible in the toolbar.";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindowControl"/> class.
         /// </summary>
@@ -74,6 +77,8 @@ namespace VSIXSpotifyRemote
                     break;
             }
 
+            ///////////////////
+
             checkBox_hideText.IsChecked = UserPreferences.Default.HideButtonTextOnInactive;
             if(UserPreferences.Default.HideButtonTextOnInactive)
             {
@@ -83,6 +88,19 @@ namespace VSIXSpotifyRemote
             {
                 label_hideText.Content = hideButtonTextHiddenInActive;
             }
+
+            checkBox_showPlayListButton.IsChecked = UserPreferences.Default.ShowOpenPlayListButton;
+            if(UserPreferences.Default.ShowOpenPlayListButton)
+            {
+                label_showPlaylistButton.Content = showPlayListButtonShown;
+            }
+            else
+            {
+                label_showPlaylistButton.Content = showPlayListButtonHidden;
+            }
+
+            ///////////////////
+
 
             checkBox_ShowTrackArtist.IsChecked = UserPreferences.Default.showTrackArtistOnChange;
             checkBox_enableInteractiveAnimation.IsChecked = UserPreferences.Default.EnableInteractiveAnimation;
@@ -128,6 +146,7 @@ namespace VSIXSpotifyRemote
             }
 
             UserPreferences.Default.HideButtonTextOnInactive = checkBox_hideText.IsChecked ?? true;
+            UserPreferences.Default.ShowOpenPlayListButton = checkBox_showPlayListButton.IsChecked ?? true;
             UserPreferences.Default.showTrackArtistOnChange = checkBox_ShowTrackArtist.IsChecked ?? true;
             UserPreferences.Default.EnableInteractiveAnimation = checkBox_enableInteractiveAnimation.IsChecked ?? true;
             UserPreferences.Default.Save();
@@ -202,6 +221,18 @@ namespace VSIXSpotifyRemote
             SetControlsToSavedValues();
         }
 
+        private void checkBox_showPlayListButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+            SetControlsToSavedValues();
+        }
+
+        private void checkBox_showPlayListButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SaveControlStatesToSettings();
+            SetControlsToSavedValues();
+        }
+
         private void UpdateTextHiddenStates()
         {
             Command1.Instance.SetStartupCommandTextState();
@@ -209,6 +240,8 @@ namespace VSIXSpotifyRemote
             Command3.Instance.SetStartupCommandTextState();
             Command4.Instance.SetStartupCommandTextState();
         }
+
+        
     }
 }
 
