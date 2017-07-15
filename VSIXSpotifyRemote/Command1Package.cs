@@ -145,7 +145,7 @@ namespace VSIXSpotifyRemote
                 if (spotWeb == null)
                 {
                     AuthenticateSpotifyWeb();
-                    MessageBox.Show(spotWeb.AccessToken);
+                   // MessageBox.Show(spotWeb.AccessToken);
                 }
 
                 bool connected = spotClient.Connect();
