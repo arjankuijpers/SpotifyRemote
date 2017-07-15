@@ -47,7 +47,7 @@ It will, when you click a command and Spotify is not running.
 
 2. Showing Track name & Artist when it changes.  
 
-*But that's not where it stops, See [Features](### Features) to so what is planned.*
+*But that's not where it stops, See [Features](### Features)  to know what is planned.*
 You can also make a feature request (at github).
 
 **Can I help with development?**  
@@ -66,11 +66,12 @@ And if your changes are stable it will be merged in the release version*
 - [x] Open Spotify
 - [x] Play / Pause
 - [x] Skip / Previous
-- [x] Shows track title upon change.
+- [x] Shows track title upon change
+- [x] Playlist browsing
 
 ### Planned
 - [x] Create better interface (update icons).
-- [ ] Hide Text of play control buttons when spotify is not active.
+- [x] Hide Text of play control buttons when spotify is not active.
 - [x] Settings in tools menu.
 - [ ] Multiple themes.
 - [ ] Awesome features people request.
