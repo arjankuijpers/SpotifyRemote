@@ -11,12 +11,30 @@
     <Grid>
         <StackPanel Orientation="Vertical">
 
-
             <Label Name="WindowTitle" Content="SpotifyRemote playlists" Background="#FF252526" Foreground="#FFBAFFAB" FontSize="20" FontFamily="Segoe UI Light" Panel.ZIndex="10"/>
-            <ListView x:Name="listView" Background="#FF2D2D30" RenderTransformOrigin="0.5,0.5" SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="listView_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="262" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView x:Name="listView" Background="#FF2D2D30" RenderTransformOrigin="0.5,0.5" SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="listView_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="262" ScrollViewer.VerticalScrollBarVisibility="Visible" Foreground="#FFABFFFF" FontFamily="Segoe UI Light">
                 <ListView.View>
-                    <GridView AllowsColumnReorder="False">
-                        <GridViewColumn/>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding Name}"/>
+                                        
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding Open}"/>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

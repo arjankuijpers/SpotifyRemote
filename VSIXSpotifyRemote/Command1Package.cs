@@ -213,6 +213,32 @@ namespace VSIXSpotifyRemote
         public async static void AuthenticateSpotifyWeb()
         {
 
+            //Check first if we already have a token from Spotify.
+            if(ApplicationData.Default.SpotifyToken != "")
+            {
+                spotWeb = new SpotifyWebAPI();
+                spotWeb.AccessToken = ApplicationData.Default.SpotifyToken;
+                spotWeb.TokenType = "Bearer";
+                SpotifyAPI.Web.Models.PrivateProfile pp = spotWeb.GetPrivateProfile();
+                if(!pp.HasError())
+                {
+                    // success
+
+                    return;
+                }
+                else
+                {
+                    //failed, is token invalid ?
+#if DEBUG
+                    MessageBox.Show("Auth from saved token failed.");
+#endif  
+                    spotWeb.Dispose();
+
+                }
+                
+            }
+
+
             WebAPIFactory webApiFactory = new WebAPIFactory(
                  "http://localhost",
                  8000,
@@ -233,8 +259,11 @@ namespace VSIXSpotifyRemote
             }
 
             if (spotWeb == null)
-                return ;
+                return;
 
+            Console.WriteLine("Token retreived succesfully from spotify web service.");
+            ApplicationData.Default.SpotifyToken = spotWeb.AccessToken;
+            ApplicationData.Default.Save();
             return;
 
         }
@@ -266,6 +295,7 @@ namespace VSIXSpotifyRemote
             m_packageDTEEvents.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(HandleVisualStudioShutDown);
             m_packageDTEEvents.OnStartupComplete += M_packageDTEEvents_OnStartupComplete;
             SpotifyRemotePlayListWindowCommand.Initialize(this);
+            Command5.Initialize(this);
         }
 
         private void M_packageDTEEvents_OnStartupComplete()

@@ -134,7 +134,18 @@
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidImages3" id="bmpPic1" />
         <Strings>
-          <ButtonText>SpotifyRemotePlayListWindow</ButtonText>
+          <ButtonText>Spotify Remote PlayLists</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidCommand1PackageCmdSet" id="cmdidCommand5" priority="0x0102" type="Button">
+        <Parent guid="guidCommand1PackageCmdSet" id="ToolbarGroup" />
+        <Icon guid="guidImages4" id="bmpPic1" />
+        <CommandFlag>AllowVisibilityChangeOnToolBar</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        
+        <Strings>
+          <ButtonText>Open PlayLists</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -149,7 +160,8 @@
       <Bitmap guid="guidImages" href="Resources\Command1.png" usedList="bmpOpen, bmpPrevious, bmpNext, bmpPlay, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages1" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
       <Bitmap guid="guidImages2" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages3" href="Resources\SpotifyRemotePlayListWindowCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages3" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages4" href="Resources\Command5.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
   </Commands>
 
@@ -169,6 +181,7 @@
       <IDSymbol value="4180" name="cmdidSettingsWindowCommand" />
       <IDSymbol value="4181" name="cmdidOpenSettingsCommand" />
       <IDSymbol value="4182" name="cmdidSpotifyRemotePlayListWindowCommand" />
+      <IDSymbol value="4183" name="cmdidCommand5" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{ee8e0218-96e0-43ab-989b-5ffbeaade8f7}">
@@ -199,6 +212,15 @@
     </GuidSymbol>
   
     <GuidSymbol value="{7993f361-1988-4727-b98a-d5abfb0d6ee0}" name="guidImages3">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{06038216-8f3c-43ec-a455-83ca35b1ea1e}" name="guidImages4">
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />
