@@ -82,5 +82,17 @@ namespace VSIXSpotifyRemote {
                 this["graphicsThemeId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowOpenPlayListButton {
+            get {
+                return ((bool)(this["ShowOpenPlayListButton"]));
+            }
+            set {
+                this["ShowOpenPlayListButton"] = value;
+            }
+        }
     }
 }

@@ -162,6 +162,11 @@ namespace VSIXSpotifyRemote
                 return;
             }
 
+            if(e.NewTrack == null || e.NewTrack.TrackResource == null || 
+                e.NewTrack.TrackResource.Name == null || e.NewTrack.AlbumResource.Name == null)
+            {
+                return;
+            }
             string trackName = e.NewTrack.TrackResource.Name;
             string artistName = e.NewTrack.ArtistResource.Name;
             Console.WriteLine("Show New track name: " + trackName);
