@@ -142,11 +142,11 @@ namespace VSIXSpotifyRemote
                     spotClient = new SpotifyAPI.Local.SpotifyLocalAPI();
                 }
 
-                if (spotWeb == null)
-                {
-                    AuthenticateSpotifyWeb();
-                   // MessageBox.Show(spotWeb.AccessToken);
-                }
+                //if (spotWeb == null)
+                //{
+                //    AuthenticateSpotifyWeb();
+                //   // MessageBox.Show(spotWeb.AccessToken);
+                //}
 
                 bool connected = spotClient.Connect();
 
@@ -208,6 +208,20 @@ namespace VSIXSpotifyRemote
             Command1.Instance.UpdateTextHiddenState();
             Command2.Instance.UpdateTextHiddenState();
             Command3.Instance.UpdateTextHiddenState();
+        }
+
+        public static bool isAuthenticated()
+        {
+            if (spotWeb != null)
+            {
+                SpotifyAPI.Web.Models.PrivateProfile pp = spotWeb.GetPrivateProfile();
+                if(!pp.HasError())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public async static void AuthenticateSpotifyWeb()

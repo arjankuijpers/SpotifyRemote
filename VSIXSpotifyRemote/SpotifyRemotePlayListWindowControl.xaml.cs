@@ -19,6 +19,8 @@ namespace VSIXSpotifyRemote
     using Microsoft.VisualStudio.PlatformUI;
     using System;
     using VSIXSpotifyRemote.PlayList;
+    using System.Timers;
+    using System.Diagnostics;
 
     namespace PlayList {
         public class SpotListViewItem
@@ -52,8 +54,8 @@ namespace VSIXSpotifyRemote
         }
 
 
-        private static int kMAX_PLAYLISTS = 110;
-        private static int kMAX_TRACKS = 110;
+        private static int kMAX_PLAYLISTS = 100;
+        private static int kMAX_TRACKS = 100;
 
         Brush foregroundLabelBrush;
         int selectedIndex = -1;
@@ -61,6 +63,7 @@ namespace VSIXSpotifyRemote
         ListViewMode lvm = ListViewMode.kPlayList;
 
         private List<string> playListNames;
+        private List<string> playListUser;
         private List<string> playListId;
         private List<string> playListUri;
         private List<PlaylistTrack> listTracksFromPL;
@@ -77,12 +80,14 @@ namespace VSIXSpotifyRemote
 
             this.InitializeComponent();
 
-            playListNames = new List<string>();
+            playListNames = new List<string>(kMAX_PLAYLISTS);
+            playListUser = new List<string>(kMAX_PLAYLISTS);
             playListId = new List<string>(kMAX_PLAYLISTS);
             playListUri= new List<string>(kMAX_PLAYLISTS);
             listTracksFromPL = new List<PlaylistTrack>(kMAX_TRACKS);
 
             Microsoft.VisualStudio.PlatformUI.VSColorTheme.ThemeChanged += VSColorTheme_ThemeChanged;
+            lvm = ListViewMode.kPlayList;
 
 
         }
@@ -156,16 +161,25 @@ namespace VSIXSpotifyRemote
 
         private void MyToolWindow_Loaded(object sender, RoutedEventArgs e)
         {
+
+            lvm = ListViewMode.kPlayList;
             UpdateUIColors();
+
+            if (!Command1Package.isAuthenticated())
+            {
+                Command1Package.AuthenticateSpotifyWeb();
+            }
+
             RetreivePlayListsFromWeb();
             ShowPlayListsInView();
+
+
 
 
             listView.Height = this.ActualHeight;// - WindowTitle.ActualHeight;
 
           
         }
-
 
         void RetreivePlayListsFromWeb()
         {
@@ -176,6 +190,7 @@ namespace VSIXSpotifyRemote
 
             for (int i = 0; i < pPlayLists.Items.Count; i++)
             {
+                playListUser.Add(pPlayLists.Items[i].Owner.Id);
                 playListNames.Add(pPlayLists.Items[i].Name);
                 playListId.Add(pPlayLists.Items[i].Id);
                 playListUri.Add(pPlayLists.Items[i].Uri);
@@ -183,12 +198,19 @@ namespace VSIXSpotifyRemote
 
         }
 
-        bool RetreiveTracksFromWeb(string playListId)
+        bool RetreiveTracksFromWeb(string playListId, string userId)
         {
             listTracksFromPL.Clear();
-            Paging<PlaylistTrack> pagingTracks = Command1Package.spotWeb.GetPlaylistTracks(userId, playListId, "", 900, 0, "");
+            Paging<PlaylistTrack> pagingTracks = Command1Package.spotWeb.GetPlaylistTracks(userId, playListId, "", kMAX_TRACKS, 0, "");
             if(pagingTracks.Items == null)
             {
+#if DEBUG
+                if (pagingTracks.HasError())
+                {
+                    Dispatcher.BeginInvoke(new System.Action(() => MessageBox.Show(pagingTracks.Error.Message, "Spotify debug error message")));
+                    Debug.WriteLine(pagingTracks.Error.Status + ":" + pagingTracks.Error.Message);
+                }
+#endif
                 return false;
             }
             listTracksFromPL.AddRange(pagingTracks.Items);
@@ -277,7 +299,7 @@ namespace VSIXSpotifyRemote
             if(lvm == ListViewMode.kPlayList)
             {
                 
-                bool successful = RetreiveTracksFromWeb(playListId[((PlayList.SpotPlayListLabel)e.Source).playlistId]);
+                bool successful = RetreiveTracksFromWeb(playListId[((PlayList.SpotPlayListLabel)e.Source).playlistId], playListUser[((PlayList.SpotPlayListLabel)e.Source).playlistId]);
                 if(successful)
                 {
                     listView.Items.Clear();
@@ -285,7 +307,7 @@ namespace VSIXSpotifyRemote
                 }
                 else
                 {
-                    MessageBox.Show("Sorry couldn't show your playlist songs.\nTry again later.");
+                    Dispatcher.BeginInvoke(new System.Action(() => MessageBox.Show("Sorry, can't show you this playlist.\nTry again later.")));
                 }
             }
             else
@@ -315,7 +337,7 @@ namespace VSIXSpotifyRemote
                     }
                     else
                     {
-                        MessageBox.Show("Track not available: " + listTracks.Items[i].Track.Name);
+                        Dispatcher.BeginInvoke(new System.Action(() => MessageBox.Show("Track not available: " + listTracks.Items[i].Track.Name)));
                     }
                 }
 
@@ -332,7 +354,7 @@ namespace VSIXSpotifyRemote
 
         private void Sa_OnResponseReceivedEvent(SpotifyAPI.Web.Auth.AutorizationCodeAuthResponse response)
         {
-            MessageBox.Show("Response: " + response.ToString());
+            Dispatcher.BeginInvoke(new System.Action(() => MessageBox.Show("Response: " + response.ToString())));
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
