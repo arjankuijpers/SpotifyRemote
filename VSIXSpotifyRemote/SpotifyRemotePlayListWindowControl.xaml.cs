@@ -16,6 +16,9 @@ namespace VSIXSpotifyRemote
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using Microsoft.VisualStudio.PlatformUI;
+    using System;
+    using VSIXSpotifyRemote.PlayList;
 
     namespace PlayList {
         public class SpotListViewItem
@@ -33,6 +36,9 @@ namespace VSIXSpotifyRemote
             public string spotifyTrackId { get; set; }
         }
     }
+
+
+   
 
     /// <summary>
     /// Interaction logic for SpotifyRemotePlayListWindowControl.
@@ -60,6 +66,9 @@ namespace VSIXSpotifyRemote
         private List<PlaylistTrack> listTracksFromPL;
 
 
+        System.Windows.Media.Color foregroundColor = Color.FromRgb(171, 255, 255);
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SpotifyRemotePlayListWindowControl"/> class.
         /// </summary>
@@ -73,20 +82,88 @@ namespace VSIXSpotifyRemote
             playListUri= new List<string>(kMAX_PLAYLISTS);
             listTracksFromPL = new List<PlaylistTrack>(kMAX_TRACKS);
 
+            Microsoft.VisualStudio.PlatformUI.VSColorTheme.ThemeChanged += VSColorTheme_ThemeChanged;
 
+
+        }
+
+        void SetListViewColors(System.Windows.Media.Color color)
+        {
+            //SolidColorBrush brushCol = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+            SolidColorBrush brushCol = new SolidColorBrush(color);
+            for (int i = 0; i < listView.Items.Count; i++)
+            {
+                (((SpotListViewItem)listView.Items[i]).Name).Foreground = brushCol;
+            }
+        }
+
+        private void UpdateUIColors()
+        {
+            var defaultBackground = VSColorTheme.GetThemedColor(EnvironmentColors.ToolWindowBackgroundColorKey);
+            var defaultForeground = VSColorTheme.GetThemedColor(EnvironmentColors.ToolWindowTextColorKey);
+
+            System.Drawing.Color c = VSColorTheme.GetThemedColor(EnvironmentColors.ToolWindowBackgroundColorKey);
+
+            SolidColorBrush backgroundCol = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+            switch (ThemeHelper.GetTheme())
+            {
+                case ThemeHelper.eVSTheme.kDark:
+                    foregroundColor = Color.FromRgb(171, 255, 255);
+                    WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(186, 255, 171));
+                    WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+                    Background = backgroundCol;
+                    listView.Background = backgroundCol;
+                    break;
+                case ThemeHelper.eVSTheme.kBlue:
+                    foregroundColor = Color.FromRgb(0, 0, 0);
+                    WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(83, 114, 76));
+                    WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+                    Background = backgroundCol;
+                    listView.Background = backgroundCol;
+                    break;
+                case ThemeHelper.eVSTheme.kLight:
+                    foregroundColor = Color.FromRgb(0, 0, 0);
+                    WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(83, 114, 76));
+                    WindowTitle.Background = backgroundCol;
+                    Background = backgroundCol;
+                    listView.Background = backgroundCol;
+                    break;
+                case ThemeHelper.eVSTheme.kUnknown:
+                    //break;
+                default:
+                    byte a = defaultForeground.A;
+                    byte r = defaultForeground.R;
+                    byte g = defaultForeground.G;
+                    byte b = defaultForeground.B;
+                    foregroundColor = Color.FromArgb(a, r, g, b);
+                    WindowTitle.Foreground = new SolidColorBrush(foregroundColor);
+                    WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+                    Dispatcher.BeginInvoke(new Action(() => MessageBox.Show("Spotify extension couldnt detect color scheme. \nWould you be so kind to file a bug report?")));
+                    break;
+            }
+
+            foregroundLabelBrush = new SolidColorBrush( foregroundColor);
+
+            SetListViewColors(foregroundColor);
+        }
+
+        private void VSColorTheme_ThemeChanged(ThemeChangedEventArgs e)
+        {
+
+            UpdateUIColors();
+            //throw new System.NotImplementedException();
         }
 
         private void MyToolWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            UpdateUIColors();
             RetreivePlayListsFromWeb();
             ShowPlayListsInView();
 
 
             listView.Height = this.ActualHeight;// - WindowTitle.ActualHeight;
 
-
-
-
+          
         }
 
 
@@ -136,7 +213,7 @@ namespace VSIXSpotifyRemote
                 
 
                 Label l = new Label();
-                l.Foreground = new SolidColorBrush(Color.FromRgb(171, 255, 255));
+                l.Foreground = new SolidColorBrush(foregroundColor);
                 l.Content = playListNames[i];
                 l.FontFamily = new FontFamily("Segoe UI Light");
 
@@ -152,7 +229,7 @@ namespace VSIXSpotifyRemote
                 
             }
             
-            foregroundLabelBrush = ((Label)((PlayList.SpotListViewItem)listView.Items[0]).Name).Foreground;
+            //foregroundLabelBrush = ((Label)((PlayList.SpotListViewItem)listView.Items[0]).Name).Foreground;
 
 
         }
@@ -173,7 +250,7 @@ namespace VSIXSpotifyRemote
 
 
                 Label l = new Label();
-                l.Foreground = new SolidColorBrush(Color.FromRgb(171, 255, 255));
+                l.Foreground = foregroundLabelBrush;
                 l.Content = listTracksFromPL[i].Track.Name;
                 l.FontFamily = new FontFamily("Segoe UI Light");
 
@@ -190,7 +267,7 @@ namespace VSIXSpotifyRemote
 
             }
 
-            foregroundLabelBrush = ((Label)((PlayList.SpotListViewItem)listView.Items[0]).Name).Foreground;
+            foregroundLabelBrush = new SolidColorBrush(foregroundColor);
 
 
         }
@@ -267,7 +344,7 @@ namespace VSIXSpotifyRemote
             }
 
             Label l = ((PlayList.SpotListViewItem)e.AddedItems[0]).Name as Label;
-            l.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+            l.Foreground = new SolidColorBrush(foregroundColor);
             if(e.RemovedItems.Count > 0)
             {
                 Label lr = ((PlayList.SpotListViewItem)e.RemovedItems[0]).Name as Label;
