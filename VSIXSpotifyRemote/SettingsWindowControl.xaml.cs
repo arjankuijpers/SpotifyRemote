@@ -271,7 +271,7 @@ namespace VSIXSpotifyRemote
             {
                 case ThemeHelper.eVSTheme.kDark:
                     foregroundColor = Color.FromRgb(255, 255, 255);
-                    subOptionsColor = Color.FromRgb(171, 255, 255);
+                    subOptionsColor = Color.FromRgb(226, 204, 129);
                     explainOptColor = Color.FromRgb(255,255,255);
                     WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(186, 255, 171));
                     WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
@@ -325,7 +325,7 @@ namespace VSIXSpotifyRemote
             title_showPlayListButton.Foreground = scb;
             title_InteractiveInfo.Foreground = scb;
 
-            //devInfoLabel.Foreground = scb;
+            title_devInfo.Foreground = scb;
         }
 
         private void UpdateSettingsSubOptions(Color color)

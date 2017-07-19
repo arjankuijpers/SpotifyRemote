@@ -66,7 +66,7 @@ namespace VSIXSpotifyRemote
         private List<PlaylistTrack> listTracksFromPL;
 
 
-        System.Windows.Media.Color foregroundColor = Color.FromRgb(171, 255, 255);
+        System.Windows.Media.Color foregroundColor = Color.FromRgb(226, 204, 129);
 
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace VSIXSpotifyRemote
             switch (ThemeHelper.GetTheme())
             {
                 case ThemeHelper.eVSTheme.kDark:
-                    foregroundColor = Color.FromRgb(171, 255, 255);
+                    foregroundColor = Color.FromRgb(226, 204, 129);
                     WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(186, 255, 171));
                     WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
                     Background = backgroundCol;
