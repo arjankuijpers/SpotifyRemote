@@ -141,6 +141,16 @@ namespace VSIXSpotifyRemote
                 return;
             }
 
+            if (Command1Package.spotClient == null)
+            {
+#if DEBUG
+                System.Windows.Forms.MessageBox.Show("spotClient is null.");
+                System.Diagnostics.Debug.Assert(false);
+                
+                return;
+#endif
+            }
+
 
             // Next
             Command1Package.spotClient.Skip();

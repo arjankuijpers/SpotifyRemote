@@ -10,6 +10,8 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace VSIXSpotifyRemote
 {
@@ -136,6 +138,16 @@ namespace VSIXSpotifyRemote
                 Command4.gCommand4Instance.SpotClientRegisterTrackChange();
                 Command1Package.UpdateCommandsHiddenState();
                 return;
+            }
+
+            if(Command1Package.spotClient == null)
+            {
+#if DEBUG
+                MessageBox.Show("spotClient is null.");
+                System.Diagnostics.Debug.Assert(false);
+               
+                return;
+#endif
             }
 
             //Play/Pause

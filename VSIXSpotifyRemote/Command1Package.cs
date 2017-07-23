@@ -22,6 +22,7 @@ using SpotifyAPI.Web.Auth;
 using SpotifyAPI.Web.Enums;
 using SpotifyAPI.Web;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace VSIXSpotifyRemote
 {
@@ -244,7 +245,7 @@ namespace VSIXSpotifyRemote
                 {
                     //failed, is token invalid ?
 #if DEBUG
-                    MessageBox.Show("Auth from saved token failed.");
+                     MessageBox.Show("Auth from saved token failed.");
 #endif  
                     spotWeb.Dispose();
 
@@ -269,6 +270,7 @@ namespace VSIXSpotifyRemote
             }
             catch (Exception ex)
             {
+                
                 MessageBox.Show(ex.Message);
             }
 
