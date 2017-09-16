@@ -308,7 +308,7 @@ namespace VSIXSpotifyRemote
                     explainOptColor = Color.FromArgb(a, r, g, b);
                     WindowTitle.Foreground = new SolidColorBrush(foregroundColor);
                     WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
-                    Dispatcher.BeginInvoke(new System.Action(() => MessageBox.Show("Spotify extension couldnt detect color scheme. \nWould you be so kind to file a bug report?")));
+                    Dispatcher.BeginInvoke(new System.Action(() => MessageBox.Show("Spotify extension couldn't detect color scheme. \nWould you be so kind to file a bug report?")));
                     break;
             }
             //SetListViewColors(foregroundColor);

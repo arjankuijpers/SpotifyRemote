@@ -170,8 +170,19 @@ namespace VSIXSpotifyRemote
                 Command1Package.AuthenticateSpotifyWeb();
             }
 
-            RetreivePlayListsFromWeb();
-            ShowPlayListsInView();
+            
+            if(Command1Package.spotWeb != null)
+            {
+                RetreivePlayListsFromWeb();
+                ShowPlayListsInView();
+            }
+            else
+            {
+                MessageBox.Show("Sorry, authentication failed, its needed for this feature.");
+            }
+
+
+            
 
 
 

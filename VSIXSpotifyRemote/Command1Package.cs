@@ -254,12 +254,15 @@ namespace VSIXSpotifyRemote
             }
 
 
+
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() => System.Windows.MessageBox.Show("Please sign in, to be able to show your play lists.")),
+    System.Windows.Threading.DispatcherPriority.Normal);
             WebAPIFactory webApiFactory = new WebAPIFactory(
                  "http://localhost",
                  8000,
                  "3a922edff6af43e9be7abb98cf217220",
                  Scope.UserReadPrivate | Scope.PlaylistReadPrivate | Scope.UserLibraryRead | Scope.UserReadRecentlyPlayed | Scope.UserTopRead,
-                 TimeSpan.FromSeconds(20)
+                 TimeSpan.FromSeconds(60)
             );
 
             try
@@ -270,7 +273,7 @@ namespace VSIXSpotifyRemote
             }
             catch (Exception ex)
             {
-                
+                spotWeb = null;
                 MessageBox.Show(ex.Message);
             }
 
