@@ -57,6 +57,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CommandNextTrack.cs" />
+    <Compile Include="CommandOpenSettings.cs" />
     <Compile Include="CommandOpenSpotify.cs" />
     <Compile Include="CommandOpenSpotifyPackage.cs" />
     <Compile Include="CommandPlayPause.cs" />
@@ -203,6 +204,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Resources\CommandOpenSettings.png" />
     <Content Include="Resources\CommandOpenSpotify.png" />
     <Content Include="Resources\CommandOpenSpotifyPackage.ico" />
     <Content Include="Resources\SpotifyRemoteLogo.png">

@@ -58,7 +58,7 @@
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS" />
       </Group>
 
-      <Group guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" priority="0x0000">
+      <Group guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" priority="0x0100">
         <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="Toolbar" />
         
       </Group>
@@ -78,8 +78,9 @@
       <Button guid="guidCommandOpenSpotifyPackageCmdSet" id="CommandOpenSpotifyId" priority="0x099" type="Button">
         <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
-        <!--<CommandFlag>DynamicVisibility</CommandFlag>-->
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
+        <CommandFlag>AllowVisibilityChangeOnToolBar</CommandFlag>
         <Icon guid="guidImages" id="bmpOpen" />
         <Strings>
           <ButtonText>Open Spotify</ButtonText>
@@ -89,6 +90,8 @@
         <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
+        <CommandFlag>AllowVisibilityChangeOnToolBar</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Icon guid="guidImages" id="bmpPrevious" />
         <Strings>
           <ButtonText>Previous</ButtonText>
@@ -98,6 +101,8 @@
         <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
+        <CommandFlag>AllowVisibilityChangeOnToolBar</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Icon guid="guidImages" id="bmpPlay" />
         <Strings>
           <ButtonText>Play/Pause</ButtonText>
@@ -107,6 +112,8 @@
         <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
+        <CommandFlag>AllowVisibilityChangeOnToolBar</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Icon guid="guidImages" id="bmpNext" />
         <Strings>
           <ButtonText>Next</ButtonText>
@@ -118,7 +125,14 @@
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidImages" id="bmpOpen" />
         <Strings>
-          <ButtonText>Spotify Remote Settings</ButtonText>
+          <ButtonText>SpotifyRemote Settings</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidCommandOpenSpotifyPackageCmdSet" id="cmdidCommandOpenSettings" priority="0x0100" type="Button">
+        <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpOpen" />
+        <Strings>
+          <ButtonText>Open SpotifyRemote Settings</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -148,6 +162,7 @@
       <IDSymbol value="4177" name="cmdidCommandNextTrack" />
       <IDSymbol value="4178" name="cmdidCommandPlayPause" />
       <IDSymbol value="4179" name="cmdidCommandPreviousTrack" />
+      <IDSymbol value="4180" name="cmdidCommandOpenSettings" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{ce6e42e9-1699-4868-b75a-3745c2e3f9b2}">

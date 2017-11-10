@@ -105,6 +105,7 @@ namespace SpotifyRemoteNS
             CommandPlayPause.Initialize(this);
             CommandPreviousTrack.Initialize(this);
             SpotifyRemoteNS.SpotifyRemoteSettingsCommand.Initialize(this);
+            SpotifyRemoteNS.CommandOpenSettings.Initialize(this);
 
         }
 
