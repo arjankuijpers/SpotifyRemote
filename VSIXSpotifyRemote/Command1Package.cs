@@ -247,7 +247,11 @@ namespace VSIXSpotifyRemote
 #if DEBUG
                      MessageBox.Show("Auth from saved token failed.");
 #endif  
-                    spotWeb.Dispose();
+                    if(spotWeb != null)
+                    {
+                        spotWeb.Dispose();
+                    }
+                   
 
                 }
                 
@@ -262,7 +266,7 @@ namespace VSIXSpotifyRemote
                  8000,
                  "3a922edff6af43e9be7abb98cf217220",
                  Scope.UserReadPrivate | Scope.PlaylistReadPrivate | Scope.UserLibraryRead | Scope.UserReadRecentlyPlayed | Scope.UserTopRead,
-                 TimeSpan.FromSeconds(60)
+                 TimeSpan.FromSeconds(30)
             );
 
             try

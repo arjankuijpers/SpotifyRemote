@@ -104,9 +104,20 @@ namespace VSIXSpotifyRemote
             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
+
+        public void AuthenticateSpotifyWebInstance()
+        {
+            if (!Command1Package.isAuthenticated())
+            {
+                Command1Package.AuthenticateSpotifyWeb();
+            }
+        }
+
+
         public void ShowToolWindowExt()
         {
             ShowToolWindow(this, null);
+            AuthenticateSpotifyWebInstance();
         }
     }
 }

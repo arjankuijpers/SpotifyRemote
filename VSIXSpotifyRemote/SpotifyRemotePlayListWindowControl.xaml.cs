@@ -195,6 +195,12 @@ namespace VSIXSpotifyRemote
         void RetreivePlayListsFromWeb()
         {
 
+            if(Command1Package.spotWeb == null)
+            {
+                MessageBox.Show("Cant retrieve Play list, not authenticated.");
+                return;
+            }
+
             PrivateProfile privProfile = Command1Package.spotWeb.GetPrivateProfile();
             userId = privProfile.Id;
             Paging<SimplePlaylist> pPlayLists = Command1Package.spotWeb.GetUserPlaylists(privProfile.Id, kMAX_PLAYLISTS, 0);
@@ -211,6 +217,12 @@ namespace VSIXSpotifyRemote
 
         bool RetreiveTracksFromWeb(string playListId, string userId)
         {
+            if (Command1Package.spotWeb == null)
+            {
+                MessageBox.Show("Cant retrieve Play list, not authenticated.");
+                return false;
+            }
+
             listTracksFromPL.Clear();
             Paging<PlaylistTrack> pagingTracks = Command1Package.spotWeb.GetPlaylistTracks(userId, playListId, "", kMAX_TRACKS, 0, "");
             if(pagingTracks.Items == null)
@@ -307,7 +319,14 @@ namespace VSIXSpotifyRemote
 
         private void OpenLabelClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if(lvm == ListViewMode.kPlayList)
+
+            if (Command1Package.spotWeb == null)
+            {
+                MessageBox.Show("Cant retrieve Play list, not authenticated.");
+                return;
+            }
+
+            if (lvm == ListViewMode.kPlayList)
             {
                 
                 bool successful = RetreiveTracksFromWeb(playListId[((PlayList.SpotPlayListLabel)e.Source).playlistId], playListUser[((PlayList.SpotPlayListLabel)e.Source).playlistId]);
@@ -332,7 +351,11 @@ namespace VSIXSpotifyRemote
 
         void PlayPlayList(string playListId)
         {
-
+            if (Command1Package.spotWeb == null)
+            {
+                MessageBox.Show("Cant retrieve Play list, not authenticated.");
+                return;
+            }
             Paging<PlaylistTrack> listTracks = Command1Package.spotWeb.GetPlaylistTracks(userId, playListId, "", kMAX_TRACKS);
             List<string> songURIs = new List<string>();
 
