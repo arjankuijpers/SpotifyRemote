@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace SpotifyRemote
+namespace SpotifyRemoteNS
 {
     public class TrackChangeAnimator
     {

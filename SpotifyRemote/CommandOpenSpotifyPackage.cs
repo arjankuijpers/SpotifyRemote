@@ -12,7 +12,7 @@ using Microsoft.Win32;
 using EnvDTE80;
 using EnvDTE;
 
-namespace SpotifyRemote
+namespace SpotifyRemoteNS
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -35,6 +35,8 @@ namespace SpotifyRemote
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(SpotifyRemote.PackageGuidString)]
+    [ProvideToolWindow(typeof(SpotifyRemoteNS.SpotifyRemoteSettings))]
+    [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
     public sealed class SpotifyRemote : Package
     {
         /// <summary>
@@ -102,6 +104,7 @@ namespace SpotifyRemote
             CommandNextTrack.Initialize(this);
             CommandPlayPause.Initialize(this);
             CommandPreviousTrack.Initialize(this);
+            SpotifyRemoteNS.SpotifyRemoteSettingsCommand.Initialize(this);
 
         }
 
@@ -113,7 +116,7 @@ namespace SpotifyRemote
         private void SpotifyRemoteDTEEventOnStartupComplete()
         {
 
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         private void SpotifyRemoteDTEEventBeginShutdown()

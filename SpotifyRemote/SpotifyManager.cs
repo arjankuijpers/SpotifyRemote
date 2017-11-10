@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using SpotLocalAPI = SpotifyAPI.Local.SpotifyLocalAPI;
 
-namespace SpotifyRemote
+namespace SpotifyRemoteNS
 {
     public class SpotifyManager
     {

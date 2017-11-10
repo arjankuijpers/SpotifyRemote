@@ -30,17 +30,23 @@
     called "command set" and is used to group different command inside a logically related
     group; your package should define its own command set in order to avoid collisions
     with command ids defined by other packages. -->
+    
+    
 
     <Menus>
       <Menu guid="guidCommandOpenSpotifyPackageCmdSet" id="Toolbar" type="Toolbar">
-        <CommandFlag>DefaultDocked</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>AlwaysCreate</CommandFlag>
+        <CommandFlag>DefaultDocked</CommandFlag>
         <CommandFlag>NoCustomize</CommandFlag>
+        <CommandFlag>DontCache</CommandFlag>
         <Strings>
           <ButtonText>Spotify Toolbar</ButtonText>
           <CommandName>Spotify Toolbar</CommandName>
         </Strings>
+        
       </Menu>
+      
     </Menus>
 
     <!-- In this section you can define new menu groups. A menu group is a container for
@@ -54,6 +60,7 @@
 
       <Group guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" priority="0x0000">
         <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="Toolbar" />
+        
       </Group>
     </Groups>
 
@@ -105,25 +112,13 @@
           <ButtonText>Next</ButtonText>
         </Strings>
       </Button>
+      
+      
       <Button guid="guidSpotifyRemoteCmdSet" id="cmdidSpotifyRemoteSettingsCommand" priority="0x0100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
-        <Icon guid="guidImages1" id="bmpPic1" />
+        <Icon guid="guidImages" id="bmpOpen" />
         <Strings>
-          <ButtonText>SpotifyRemoteSettings</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidSpotifyRemoteCmdSet" id="cmdidSpotifyRemoteSettingsCommand1" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
-        <Icon guid="guidImages2" id="bmpPic1" />
-        <Strings>
-          <ButtonText>SpotifyRemoteSettings</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidSpotifyRemoteCmdSet" id="cmdidSpotRemoteSettingsWindowCommand" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
-        <Icon guid="guidImages3" id="bmpPic1" />
-        <Strings>
-          <ButtonText>SpotRemoteSettingsWindow</ButtonText>
+          <ButtonText>Spotify Remote Settings</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -136,9 +131,7 @@
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
       <Bitmap guid="guidImages" href="Resources\CommandOpenSpotify.png" usedList="bmpOpen, bmpPrevious, bmpNext, bmpPlay, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages1" href="Resources\SpotifyRemoteSettingsCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages2" href="Resources\SpotifyRemoteSettingsCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
-      <Bitmap guid="guidImages3" href="Resources\SpotRemoteSettingsWindowCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      
     </Bitmaps>
   </Commands>
 
@@ -167,39 +160,19 @@
     </GuidSymbol>
   
    
- 
   
-    <GuidSymbol value="{3e04fbf4-2143-45db-9a46-9ce93636fcd7}" name="guidSpotifyRemoteCmdSet">
+    <GuidSymbol value="{a371da0a-7a6a-4976-a96f-d32056ece7b0}" name="guidSpotifyRemoteCmdSet">
       <IDSymbol value="256" name="cmdidSpotifyRemoteSettingsCommand" />
-      <IDSymbol value="257" name="cmdidSpotifyRemoteSettingsCommand1" />
-      <IDSymbol value="258" name="cmdidSpotRemoteSettingsWindowCommand" />
     </GuidSymbol>
-  
-    <GuidSymbol value="{5b464284-d759-47d4-b276-bb902024ea18}" name="guidImages1">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
-  
-    <GuidSymbol value="{d57ece6f-cbb0-4604-bbd1-412721f48456}" name="guidImages2">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
-  
-    <GuidSymbol value="{692093ba-41d3-45f8-be98-380dacfe46e9}" name="guidImages3">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
+    
   </Symbols>
+
+    <VisibilityConstraints>
+
+    <VisibilityItem guid="guidCommandOpenSpotifyPackageCmdSet" id="Toolbar" context="UICONTEXT_NoSolution" />
+      <VisibilityItem guid="guidCommandOpenSpotifyPackageCmdSet" id="Toolbar" context="UICONTEXT_EmptySolution" />
+      <VisibilityItem guid="guidCommandOpenSpotifyPackageCmdSet" id="Toolbar" context="UICONTEXT_SolutionHasMultipleProjects" />
+      <VisibilityItem guid="guidCommandOpenSpotifyPackageCmdSet" id="Toolbar" context="UICONTEXT_SolutionHasSingleProject" />
+  </VisibilityConstraints>
+  
 </CommandTable>
