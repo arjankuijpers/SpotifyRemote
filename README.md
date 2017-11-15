@@ -80,7 +80,7 @@ Do you miss a feature? Submit a request here: [Github](https://github.com/arjank
 
 ## Troubleshooting
 
-**SpotifyRemote is not visible in the Visual studio toolbar**  
+**SpotifyRemote is not visible in the Visual studio**  
 4. Go to **view** *>* **Toolbars** and Select **SpotifyRemote** it should show up at the top of Visual Studio.
 
 ## About SpotifyRemote
