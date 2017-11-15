@@ -1,14 +1,23 @@
 ﻿namespace SpotifyRemoteNS
 {
+    using Microsoft.VisualStudio.PlatformUI;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
 
     /// <summary>
     /// Interaction logic for SpotifyRemoteSettingsControl.
     /// </summary>
     public partial class SpotifyRemoteSettingsControl : UserControl
     {
+
+        System.Windows.Media.Color foregroundColor = new System.Windows.Media.Color();
+        System.Windows.Media.Color subOptionsColor = new System.Windows.Media.Color();
+        System.Windows.Media.Color explainOptColor = new System.Windows.Media.Color();
+
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SpotifyRemoteSettingsControl"/> class.
         /// </summary>
@@ -17,9 +26,15 @@
             this.InitializeComponent();
         }
 
+        private void SpotifyRemoteSettings_Initialized(object sender, System.EventArgs e)
+        {
+            Microsoft.VisualStudio.PlatformUI.VSColorTheme.ThemeChanged += VSColorTheme_ThemeChanged;
+        }
+
         private void SpotifyRemoteSettings_Loaded(object sender, RoutedEventArgs e)
         {
             LoadSettings();
+            UpdateUIColors();
         }
 
         private void SpotifyRemoteSettings_Unloaded(object sender, RoutedEventArgs e)
@@ -121,6 +136,104 @@
             }
 
            
+        }
+
+
+        ///////////////////////////////////////////////////////////////////
+        //// Theme
+
+
+        private void VSColorTheme_ThemeChanged(Microsoft.VisualStudio.PlatformUI.ThemeChangedEventArgs e)
+        {
+            UpdateUIColors();
+        }
+        private void UpdateUIColors()
+        {
+            var defaultBackground = VSColorTheme.GetThemedColor(EnvironmentColors.ToolWindowBackgroundColorKey);
+            var defaultForeground = VSColorTheme.GetThemedColor(EnvironmentColors.ToolWindowTextColorKey);
+
+            System.Drawing.Color c = VSColorTheme.GetThemedColor(EnvironmentColors.ToolWindowBackgroundColorKey);
+
+            SolidColorBrush backgroundCol = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+            switch (ThemeHelper.GetTheme())
+            {
+                case ThemeHelper.eVSTheme.kDark:
+                    foregroundColor = Color.FromRgb(255, 255, 255);
+                    subOptionsColor = Color.FromRgb(130, 203, 247);
+                    explainOptColor = Color.FromRgb(255, 255, 255);
+                    WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(186, 255, 171));
+                    WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+                    Background = backgroundCol;
+                    //listView.Background = backgroundCol;
+                    break;
+                case ThemeHelper.eVSTheme.kBlue:
+                    foregroundColor = Color.FromRgb(0, 0, 0);
+                    subOptionsColor = Color.FromRgb(100, 106, 106);
+                    explainOptColor = Color.FromRgb(0, 0, 0);
+                    WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(83, 114, 76));
+                    WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+                    Background = backgroundCol;
+                    //.Background = backgroundCol;
+                    break;
+                case ThemeHelper.eVSTheme.kLight:
+                    foregroundColor = Color.FromRgb(0, 0, 0);
+                    subOptionsColor = Color.FromRgb(100, 106, 106);
+                    explainOptColor = Color.FromRgb(0, 0, 0);
+                    WindowTitle.Foreground = new SolidColorBrush(Color.FromRgb(83, 114, 76));
+                    WindowTitle.Background = backgroundCol;
+                    Background = backgroundCol;
+                    //listView.Background = backgroundCol;
+                    break;
+                case ThemeHelper.eVSTheme.kUnknown:
+                //break;
+                default:
+                    byte a = defaultForeground.A;
+                    byte r = defaultForeground.R;
+                    byte g = defaultForeground.G;
+                    byte b = defaultForeground.B;
+                    foregroundColor = Color.FromArgb(a, r, g, b);
+                    subOptionsColor = Color.FromArgb(a, r, g, b);
+                    explainOptColor = Color.FromArgb(a, r, g, b);
+                    WindowTitle.Foreground = new SolidColorBrush(foregroundColor);
+                    WindowTitle.Background = new SolidColorBrush(ThemeHelper.ToMediaColor(defaultBackground));
+                    Dispatcher.BeginInvoke(new System.Action(() => MessageBox.Show("Spotify extension couldn't detect color scheme. \nWould you be so kind to file a bug report?")));
+                    break;
+            }
+            //SetListViewColors(foregroundColor);
+            UpdateSettingsTitles(foregroundColor);
+            UpdateSettingsSubOptions(subOptionsColor);
+            UpdateExplainationSettings(explainOptColor);
+        }
+
+        private void UpdateSettingsTitles(Color color)
+        {
+            SolidColorBrush scb = new SolidColorBrush(color);
+            title_textVisibility.Foreground = scb;
+            title_hideButText.Foreground = scb;
+            title_showPlayListButton.Foreground = scb;
+            title_InteractiveInfo.Foreground = scb;
+
+            title_devInfoNotAvailable.Foreground = scb;
+            title_devInfo.Foreground = scb;
+        }
+
+        private void UpdateSettingsSubOptions(Color color)
+        {
+            SolidColorBrush scb = new SolidColorBrush(color);
+            rb_tv0.Foreground = scb;
+            rb_tv1.Foreground = scb;
+            rb_tv2.Foreground = scb;
+            checkBox_hideText.Foreground = scb;
+            checkBox_ShowTrackArtist.Foreground = scb;
+            checkBox_enableInteractiveAnimation.Foreground = scb;
+
+        }
+
+        private void UpdateExplainationSettings(Color color)
+        {
+            SolidColorBrush scb = new SolidColorBrush(color);
+            label_hideText.Foreground = scb;
+            additionalInfoEnableAnimation.Foreground = scb;
         }
 
         

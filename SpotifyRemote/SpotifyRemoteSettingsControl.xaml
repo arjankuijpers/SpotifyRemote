@@ -7,7 +7,7 @@
              Foreground="{DynamicResource VsBrush.WindowText}"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="440"
-             Name="SpotifyRemoteSettings" Loaded="SpotifyRemoteSettings_Loaded" Unloaded="SpotifyRemoteSettings_Unloaded">
+             Name="SpotifyRemoteSettings" Loaded="SpotifyRemoteSettings_Loaded" Unloaded="SpotifyRemoteSettings_Unloaded" Initialized="SpotifyRemoteSettings_Initialized">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Width="430" >
             <Label x:Name="WindowTitle" Content="SpotifyRemote Settings

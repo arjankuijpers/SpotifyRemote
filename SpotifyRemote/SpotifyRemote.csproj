@@ -70,6 +70,7 @@
     <Compile Include="SpotifyRemoteSettingsControl.xaml.cs">
       <DependentUpon>SpotifyRemoteSettingsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ThemeHelper.cs" />
     <Compile Include="TrackChangeAnimator.cs" />
     <Compile Include="Triggers.Designer.cs">
       <AutoGen>True</AutoGen>
