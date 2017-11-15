@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SpotifyRemote")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Controlling Spotify from Visual Studio, thats the dream!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SpotifyRemote")]
