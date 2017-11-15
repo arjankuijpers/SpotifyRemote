@@ -7,16 +7,16 @@
              Foreground="{DynamicResource VsBrush.WindowText}"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="440"
-             Name="SpotifyRemoteSettings">
+             Name="SpotifyRemoteSettings" Loaded="SpotifyRemoteSettings_Loaded" Unloaded="SpotifyRemoteSettings_Unloaded">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Width="430" >
             <Label x:Name="WindowTitle" Content="SpotifyRemote Settings
                    " Background="{x:Null}" Foreground="#FFBAFFAB" FontSize="20" FontFamily="Segoe UI Light"/>
             <Grid Height="56">
                 <Label x:Name="title_textVisibility" Content="Text visibility options" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontSize="14"/>
-                <RadioButton x:Name="rb_tv1" Content="Only show Spotify" HorizontalAlignment="Left" Margin="122,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" GroupName="TextVisibility"/>
-                <RadioButton x:Name="rb_tv0" Content="Show everything" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" IsChecked="True" GroupName="TextVisibility"  Background="White"/>
-                <RadioButton x:Name="rb_tv2" Content="Hide everything" HorizontalAlignment="Left" Margin="242,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" GroupName="TextVisibility" />
+                <RadioButton x:Name="rb_tv1" Content="Only show Open" HorizontalAlignment="Left" Margin="122,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" GroupName="TextVisibility" />
+                <RadioButton x:Name="rb_tv0" Content="Show everything" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" IsChecked="True" GroupName="TextVisibility"  Background="White" />
+                <RadioButton x:Name="rb_tv2" Content="Hide everything" HorizontalAlignment="Left" Margin="235,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" GroupName="TextVisibility" />
             </Grid>
             <Grid Height="98">
                 <CheckBox x:Name="checkBox_hideText" Content="Hide text if spotify is inactive" HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" IsChecked="True" />
@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="69*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox x:Name="checkBox_ShowTrackArtist" Content="Show track and artist on change." HorizontalAlignment="Left" Margin="17,26,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" IsChecked="True" Grid.ColumnSpan="2" />
-                <CheckBox x:Name="checkBox_enableInteractiveAnimation" Content="Enable animation (decreases editor performance)" HorizontalAlignment="Left" Margin="17,46,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" IsChecked="True" Grid.ColumnSpan="2" />
+                <CheckBox x:Name="checkBox_enableInteractiveAnimation" Content="Enable animation." HorizontalAlignment="Left" Margin="27,46,0,0" VerticalAlignment="Top" Foreground="#FF82CBF7" IsChecked="True" Grid.ColumnSpan="2" />
                 <Label x:Name="title_InteractiveInfo" Content="Interactive information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" Grid.ColumnSpan="2"/>
                 <Label x:Name="additionalInfoEnableAnimation" Content="may slowdown Visual Studio on lowend devices, &#xD;&#xA;when animation is playing. disable if you experience issues." Foreground="White" FontSize="11" Grid.ColumnSpan="2" Margin="40,61,10,-26"/>
             </Grid>

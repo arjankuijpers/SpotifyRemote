@@ -77,8 +77,13 @@ namespace SpotifyRemoteNS
             // not sited yet inside Visual Studio environment. The place to do all the other
             // initialization is the Initialize method.
 
+
+            SettingsManager sm = new SettingsManager();
+            SettingsManager.ProvideSettingsManager(ref sm);
+
             m_spotifyManager = new SpotifyManager();
-            m_spotifyManager.Initialize();
+            sm.SetSpotifyManager(ref m_spotifyManager);
+    
 
         }
 
@@ -93,7 +98,7 @@ namespace SpotifyRemoteNS
             
 
 
-            CommandOpenSpotify.Initialize(this);
+            
             base.Initialize();
 
            
@@ -101,11 +106,25 @@ namespace SpotifyRemoteNS
             m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
             m_packageDTEEvents.OnBeginShutdown += SpotifyRemoteDTEEventBeginShutdown;
             m_packageDTEEvents.OnStartupComplete += SpotifyRemoteDTEEventOnStartupComplete;
+
+            SettingsManager sm = SettingsManager.GetSettingsManager();
+
+
+            CommandOpenSpotify.Initialize(this);
             CommandNextTrack.Initialize(this);
             CommandPlayPause.Initialize(this);
             CommandPreviousTrack.Initialize(this);
             SpotifyRemoteNS.SpotifyRemoteSettingsCommand.Initialize(this);
             SpotifyRemoteNS.CommandOpenSettings.Initialize(this);
+
+            sm.ReadSettingsFromFile();
+            sm.ApplyCurrentSettings();
+
+            m_spotifyManager.Initialize();
+
+            
+
+
 
         }
 
@@ -122,6 +141,7 @@ namespace SpotifyRemoteNS
 
         private void SpotifyRemoteDTEEventBeginShutdown()
         {
+            SettingsManager.GetSettingsManager().SaveSettingsToFile();
             m_spotifyManager.Destroy();
 
         }

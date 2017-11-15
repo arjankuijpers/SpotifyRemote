@@ -9,21 +9,21 @@ namespace SpotifyRemoteNS
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class CommandOpenSpotify
+    public class CommandOpenSpotify
     {
 
 
 
 #if DEBUG
-        private const string kSpotifyOpenString = "Open Spotify(D)";
+        public const string kSpotifyOpenString = "Open Spotify(D)";
 #else
-        private const string kSpotifyOpenString = "Open Spotify";
+        public const string kSpotifyOpenString = "Open Spotify";
 #endif
 
 #if DEBUG
-        private const string kSpotifyStartString = "Start Spotify(D)";
+        public const string kSpotifyStartString = "Start Spotify(D)";
 #else
-        private const string kSpotifyStartString = "Start Spotify";
+        public const string kSpotifyStartString = "Start Spotify";
 #endif
 
 
@@ -52,7 +52,7 @@ namespace SpotifyRemoteNS
         private SpotifyManager m_spotifyManager;
 
         private TrackChangeAnimator m_trackChangeAnimator;
-        private string m_currentTextlabel = kSpotifyOpenString;
+        public string m_currentTextlabel = kSpotifyOpenString;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandOpenSpotify"/> class.
@@ -80,11 +80,19 @@ namespace SpotifyRemoteNS
                 commandService.AddCommand(menuItem);
             }
 
+
+            
+
             // Initialize TrackChangeAnimator.
             m_trackChangeAnimator = new TrackChangeAnimator();
             m_trackChangeAnimator.Initialize(menuItem, m_currentTextlabel);
 
             m_spotifyManager.SpotifyClientTrackChange += SpotifyClientTrackChange;
+
+
+            SettingsManager setManager = SettingsManager.GetSettingsManager();
+            setManager.SetTbButtonOpen(ref menuItem);
+            setManager.SetTrackChangeAnimation(ref m_trackChangeAnimator);
 
 
 
@@ -98,11 +106,7 @@ namespace SpotifyRemoteNS
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static CommandOpenSpotify Instance
-        {
-            get;
-            private set;
-        }
+        public static CommandOpenSpotify Instance;
 
         /// <summary>
         /// Gets the service provider from the owner package.
@@ -122,6 +126,8 @@ namespace SpotifyRemoteNS
         public static void Initialize(Package package)
         {
             Instance = new CommandOpenSpotify(package);
+            SettingsManager setManager = SettingsManager.GetSettingsManager();
+            setManager.SetCmdOpenSpotify(ref Instance);
         }
 
         /// <summary>

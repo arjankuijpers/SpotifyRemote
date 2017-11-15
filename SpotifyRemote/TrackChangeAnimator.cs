@@ -32,6 +32,17 @@ namespace SpotifyRemoteNS
             return true;
         }
 
+
+        public void SetTrackChange(bool enabled)
+        {
+            m_trackChangeEnabled = enabled;
+        }
+
+        public void SetAnimationOnChange(bool enabled)
+        {
+            m_animationEnabled = enabled;
+        }
+
        public void SetStandardCommandText(string text)
         {
             m_standardCommandText = text;

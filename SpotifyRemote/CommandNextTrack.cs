@@ -4,6 +4,8 @@ using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
+
+
 namespace SpotifyRemoteNS
 {
     /// <summary>
@@ -11,6 +13,8 @@ namespace SpotifyRemoteNS
     /// </summary>
     internal sealed class CommandNextTrack
     {
+
+        public const string commandText = "Next";
         /// <summary>
         /// Command ID.
         /// </summary>
@@ -44,12 +48,16 @@ namespace SpotifyRemoteNS
             m_spotifyManager = spotifyRemotePackage.GetSpotifyManager();
 
             OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            OleMenuCommand menuItem = null;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
+                menuItem = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
                 commandService.AddCommand(menuItem);
             }
+
+            SettingsManager setManager = SettingsManager.GetSettingsManager();
+            setManager.SetTbButtonNext(ref menuItem);
         }
 
         /// <summary>

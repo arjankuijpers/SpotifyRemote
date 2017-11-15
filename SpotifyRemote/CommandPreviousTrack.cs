@@ -11,6 +11,9 @@ namespace SpotifyRemoteNS
     /// </summary>
     internal sealed class CommandPreviousTrack
     {
+
+        public const string commandText = "Pause";
+
         /// <summary>
         /// Command ID.
         /// </summary>
@@ -44,12 +47,16 @@ namespace SpotifyRemoteNS
             m_spotifyManager = spotifyRemotePackage.GetSpotifyManager();
 
             OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            OleMenuCommand menuItem = null;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
+                menuItem = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
                 commandService.AddCommand(menuItem);
             }
+
+            SettingsManager setManager = SettingsManager.GetSettingsManager();
+            setManager.SetTbButtonPrevious(ref menuItem);
         }
 
         /// <summary>

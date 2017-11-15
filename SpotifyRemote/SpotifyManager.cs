@@ -26,6 +26,15 @@ namespace SpotifyRemoteNS
         {
             Debug.WriteLine("SpotifyManager Initialize.");
             ConnectToSpotifyClient();
+
+            if(!IsSpotifyProcessRunning())
+            {
+                CommandOpenSpotify.Instance.m_currentTextlabel = CommandOpenSpotify.kSpotifyStartString;
+            }
+            else
+            {
+                CommandOpenSpotify.Instance.m_currentTextlabel = CommandOpenSpotify.kSpotifyOpenString;
+            }
            
             return true;
         }
@@ -61,6 +70,7 @@ namespace SpotifyRemoteNS
 
             if (SpotLocalAPI.IsSpotifyRunning())
             {
+                CommandOpenSpotify.Instance.m_currentTextlabel = CommandOpenSpotify.kSpotifyOpenString;
                 if (spotClient == null)
                 {
                     spotClient = new SpotLocalAPI();
@@ -76,9 +86,13 @@ namespace SpotifyRemoteNS
                     RegisterEvents();
                 }
                 spotClientConnected = connected;
+
+                SettingsManager.GetSettingsManager().ApplyCurrentSettings();
                 return connected;
             }
 
+            CommandOpenSpotify.Instance.m_currentTextlabel = CommandOpenSpotify.kSpotifyStartString;
+            SettingsManager.GetSettingsManager().ApplyCurrentSettings();
             spotClientConnected = false;
             return false;
         }
