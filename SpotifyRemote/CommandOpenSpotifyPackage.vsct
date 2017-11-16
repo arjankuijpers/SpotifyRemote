@@ -79,6 +79,7 @@
         <Parent guid="guidCommandOpenSpotifyPackageCmdSet" id="ToolbarGroup" />
         <CommandFlag>IconAndText</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DontCache</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
         <CommandFlag>AllowVisibilityChangeOnToolBar</CommandFlag>
         <Icon guid="guidImages" id="bmpOpen" />
