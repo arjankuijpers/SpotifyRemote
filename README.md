@@ -1,9 +1,9 @@
 <img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/297aadc6d2ca8b99afcb631bd2b4c1132a89fc31/VSIXSpotifyRemote/SpotifyRemoteLogo.png" width="200">
 
 # SpotifyRemote
-## For Visual Studio (2015/2017)
-
 <img src="https://arjankuijpers.gallerycdn.vsassets.io/extensions/arjankuijpers/spotifyremote/2.0/1510793706623/271382/1/2017-07-16_00-24-42.gif">
+
+## For Visual Studio (2015/2017)
 
 License:
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)  
