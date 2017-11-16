@@ -3,6 +3,8 @@
 # SpotifyRemote
 ## For Visual Studio (2015/2017)
 
+<img src="https://arjankuijpers.gallerycdn.vsassets.io/extensions/arjankuijpers/spotifyremote/2.0/1510793706623/271382/1/2017-07-16_00-24-42.gif">
+
 License:
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)  
 Join the conversation on:
