@@ -24,9 +24,9 @@ Master: [![Build status](https://ci.appveyor.com/api/projects/status/nkoom7kwayh
 2. Run the Visual Studio extension installer (VSIX).
 3. Restart Visual Studio.
 4. Go to **view** *>* **Toolbars** and Select **SpotifyRemote**  
-<img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/master/VSIXSpotifyRemote/docs/enable_tb_from_view.png" width="350">  
+<img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/081ea5748298841b9385c684de59b0f88dfd9399/SpotifyRemote/docs/enable_tb_from_view.png" width="350">  
 
-[Click here](https://github.com/arjankuijpers/SpotifyRemote/blob/master/VSIXSpotifyRemote/docs/enable_tb_from_view.png) for full sized screenshot
+[Click here](https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/081ea5748298841b9385c684de59b0f88dfd9399/SpotifyRemote/docs/enable_tb_from_view.png) for full sized screenshot
 
 ## Tips
 
@@ -81,7 +81,18 @@ Do you miss a feature? Submit a request here: [Github](https://github.com/arjank
 ## Troubleshooting
 
 **SpotifyRemote is not visible in the Visual studio**  
-4. Go to **view** *>* **Toolbars** and Select **SpotifyRemote** it should show up at the top of Visual Studio.
+Go to **view** *>* **Toolbars** and Select **SpotifyRemote** it should show up at the top of Visual Studio.
+
+The toolbar will be displayed over here.
+<img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/081ea5748298841b9385c684de59b0f88dfd9399/SpotifyRemote/docs/Enable_toolbar1.png" >
+
+Go to toolbars and select the SpotifyRemote toolbar.  
+<img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/081ea5748298841b9385c684de59b0f88dfd9399/SpotifyRemote/docs/Enable_toolbar2.png" width="200">
+
+The toolbar should now be visible. (icons may be different).
+<img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/081ea5748298841b9385c684de59b0f88dfd9399/SpotifyRemote/docs/Enable_toolbar3.png">
+
+
 
 ## About SpotifyRemote
 
