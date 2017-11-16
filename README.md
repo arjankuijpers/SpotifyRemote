@@ -67,7 +67,7 @@ And if your changes are stable it will be merged in the release version*
 - [x] Play / Pause
 - [x] Skip / Previous
 - [x] Shows track title upon change
-- [x] Playlist browsing
+- [ ] Playlist browsing
 
 ### Planned
 - [x] Create better interface (update icons).
@@ -78,6 +78,11 @@ And if your changes are stable it will be merged in the release version*
 
 Do you miss a feature? Submit a request here: [Github](https://github.com/arjankuijpers/SpotifyRemote/issues)
 
+## Troubleshooting
+
+**SpotifyRemote is not visible in the Visual studio**  
+4. Go to **view** *>* **Toolbars** and Select **SpotifyRemote** it should show up at the top of Visual Studio.
+
 ## About SpotifyRemote
 
 SpotifyRemote is a attempt to recreate the awesome [vscode-spotify](https://marketplace.visualstudio.com/items?itemName=shyykoserhiy.vscode-spotify) plugin from [shyykoserhiy](https://github.com/ShyykoSerhiy/vscode-spotify).  
@@ -87,3 +92,5 @@ Please submit bug reports and feature requests at [Github](https://github.com/ar
 ## License
 
 [SpotifyRemote is released under the MIT License](https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/master/LICENSE).
+
+
