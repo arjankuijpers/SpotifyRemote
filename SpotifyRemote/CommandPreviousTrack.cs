@@ -12,7 +12,7 @@ namespace SpotifyRemoteNS
     internal sealed class CommandPreviousTrack
     {
 
-        public const string commandText = "Pause";
+        public const string commandText = "Previous";
 
         /// <summary>
         /// Command ID.
