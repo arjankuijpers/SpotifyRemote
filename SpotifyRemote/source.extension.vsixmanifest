@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="SpotifyRemote.dfb16296-2b1e-4fca-9739-86b0c5093bef" Version="2.0" Language="en-US" Publisher="Arjan Kuijpers" />
+        <Identity Id="SpotifyRemote.dfb16296-2b1e-4fca-9739-86b0c5093bef" Version="2.0.1" Language="en-US" Publisher="Arjan Kuijpers" />
         <DisplayName>SpotifyRemote</DisplayName>
         <Description xml:space="preserve">Spotify Remote. 
 With SpotifyRemote you can stay inside Visual Studio to manage spotify, no need to switch to spotify anymore. Visual Studio + Spotify.</Description>

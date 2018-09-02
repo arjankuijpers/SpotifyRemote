@@ -39,7 +39,7 @@
                 <Label x:Name="additionalInfoEnableAnimation" Content="may slowdown Visual Studio on lowend devices, &#xD;&#xA;when animation is playing. disable if you experience issues." Foreground="White" FontSize="11" Grid.ColumnSpan="2" Margin="40,61,10,-26"/>
             </Grid>
             <Grid Height="56">
-                <Label x:Name="title_devInfo" Content="SpotifyRemote v2.x.x" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontSize="10" FontWeight="Bold"/>
+                <Label x:Name="title_devInfo" Content="SpotifyRemote v2.0.1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontSize="10" FontWeight="Bold"/>
 
             </Grid>
 
