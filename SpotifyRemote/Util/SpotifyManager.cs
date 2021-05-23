@@ -2,14 +2,15 @@
 using System.Diagnostics;
 using SpotifyRemoteNS.commands;
 using SpotLocalAPI = SpotifyAPI.Local.SpotifyLocalAPI;
+using SpotifyAPI.Web;
 
 namespace SpotifyRemoteNS.Util
 {
     public class SpotifyManager
     {
 
-        private SpotifyAPI.Local.SpotifyLocalAPI spotClient;
-        private SpotifyAPI.Web.SpotifyWebAPI spotWeb;
+        private SpotLocalAPI spotClient;
+        private SpotifyWebAPI spotWeb;
         private bool spotClientConnected = false;
 
         public SpotifyManager()
@@ -18,6 +19,7 @@ namespace SpotifyRemoteNS.Util
             spotWeb = null;
             spotClientConnected = false;
         }
+
         public bool Initialize()
         {
             Debug.WriteLine("SpotifyManager Initialize.");
@@ -34,12 +36,11 @@ namespace SpotifyRemoteNS.Util
 
             return true;
         }
+
         public void Destroy()
         {
             DisconnectSpotifyClient();
         }
-
-
 
         public bool GetSpotifyConnectionStatus()
         {
@@ -75,7 +76,6 @@ namespace SpotifyRemoteNS.Util
                 bool connected = spotClient.Connect();
 #if DEBUG
                 Debug.WriteLine("Spotify Client Connected: {0}", connected);
-                Debug.Assert(connected);
 #endif
                 if (connected)
                 {

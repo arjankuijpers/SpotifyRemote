@@ -88,20 +88,13 @@ namespace SpotifyRemoteNS.Util
         /// </summary>
         protected override void Initialize()
         {
-
-
-
-
             base.Initialize();
-
-
 
             m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
             m_packageDTEEvents.OnBeginShutdown += SpotifyRemoteDTEEventBeginShutdown;
             m_packageDTEEvents.OnStartupComplete += SpotifyRemoteDTEEventOnStartupComplete;
 
             SettingsManager sm = SettingsManager.GetSettingsManager();
-
 
             CommandOpenSpotify.Initialize(this);
             CommandNextTrack.Initialize(this);
@@ -114,11 +107,6 @@ namespace SpotifyRemoteNS.Util
             sm.ApplyCurrentSettings();
 
             m_spotifyManager.Initialize();
-
-
-
-
-
         }
 
         public ref SpotifyManager GetSpotifyManager()

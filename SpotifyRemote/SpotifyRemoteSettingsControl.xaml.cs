@@ -51,13 +51,13 @@ namespace SpotifyRemoteNS
             SettingsManager sm = SettingsManager.GetSettingsManager();
             switch (sm.GetButtonTextMode())
             {
-                case SettingsManager.eToolbarTextMode.kAllTextVisible:
+                case SettingsManager.EToolbarTextMode.kAllTextVisible:
                     rb_tv0.IsChecked = true;
                     break;
-                case SettingsManager.eToolbarTextMode.kOpenTextVisible:
+                case SettingsManager.EToolbarTextMode.kOpenTextVisible:
                     rb_tv1.IsChecked = true;
                     break;
-                case SettingsManager.eToolbarTextMode.kHideAllText:
+                case SettingsManager.EToolbarTextMode.kHideAllText:
                     rb_tv2.IsChecked = true;
                     break;
                 default:
@@ -77,15 +77,15 @@ namespace SpotifyRemoteNS
 
             switch (sm.GetTrackChangeMode())
             {
-                case SettingsManager.eToolbarTrackChangeMode.kDisabled:
+                case SettingsManager.EToolbarTrackChangeMode.kDisabled:
                     checkBox_ShowTrackArtist.IsChecked = false;
                     checkBox_enableInteractiveAnimation.IsChecked = false;
                     break;
-                case SettingsManager.eToolbarTrackChangeMode.kEnabledNoAnimation:
+                case SettingsManager.EToolbarTrackChangeMode.kEnabledNoAnimation:
                     checkBox_ShowTrackArtist.IsChecked = true;
                     checkBox_enableInteractiveAnimation.IsChecked = false;
                     break;
-                case SettingsManager.eToolbarTrackChangeMode.kEnabledWithAnimation:
+                case SettingsManager.EToolbarTrackChangeMode.kEnabledWithAnimation:
                     checkBox_ShowTrackArtist.IsChecked = true;
                     checkBox_enableInteractiveAnimation.IsChecked = true;
                     break;
@@ -101,15 +101,15 @@ namespace SpotifyRemoteNS
             SettingsManager sm = SettingsManager.GetSettingsManager();
             if (rb_tv0.IsChecked == true)
             {
-                sm.SetButtonTextMode(SettingsManager.eToolbarTextMode.kAllTextVisible);
+                sm.SetButtonTextMode(SettingsManager.EToolbarTextMode.kAllTextVisible);
             }
             else if (rb_tv1.IsChecked == true)
             {
-                sm.SetButtonTextMode(SettingsManager.eToolbarTextMode.kOpenTextVisible);
+                sm.SetButtonTextMode(SettingsManager.EToolbarTextMode.kOpenTextVisible);
             }
             else
             {
-                sm.SetButtonTextMode(SettingsManager.eToolbarTextMode.kHideAllText);
+                sm.SetButtonTextMode(SettingsManager.EToolbarTextMode.kHideAllText);
             }
 
 
@@ -125,15 +125,15 @@ namespace SpotifyRemoteNS
 
             if (checkBox_ShowTrackArtist.IsChecked == true && checkBox_enableInteractiveAnimation.IsChecked == true)
             {
-                sm.SetTrackChangeMode(SettingsManager.eToolbarTrackChangeMode.kEnabledWithAnimation);
+                sm.SetTrackChangeMode(SettingsManager.EToolbarTrackChangeMode.kEnabledWithAnimation);
             }
             else if (checkBox_ShowTrackArtist.IsChecked == true && checkBox_enableInteractiveAnimation.IsChecked == false)
             {
-                sm.SetTrackChangeMode(SettingsManager.eToolbarTrackChangeMode.kEnabledNoAnimation);
+                sm.SetTrackChangeMode(SettingsManager.EToolbarTrackChangeMode.kEnabledNoAnimation);
             }
             else
             {
-                sm.SetTrackChangeMode(SettingsManager.eToolbarTrackChangeMode.kDisabled);
+                sm.SetTrackChangeMode(SettingsManager.EToolbarTrackChangeMode.kDisabled);
             }
 
 
