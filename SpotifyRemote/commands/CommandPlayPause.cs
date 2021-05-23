@@ -36,6 +36,8 @@ namespace SpotifyRemoteNS.commands
         /// <param name="package">Owner package, not null.</param>
         private CommandPlayPause(Package package)
         {
+            // TODO: fix not playing bug in vs 2019.
+
             if (package == null)
             {
                 throw new ArgumentNullException("package");
@@ -96,7 +98,6 @@ namespace SpotifyRemoteNS.commands
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-
             // execute
             m_spotifyManager.PlayPause();
         }

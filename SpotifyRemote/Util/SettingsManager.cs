@@ -87,9 +87,7 @@ namespace SpotifyRemoteNS.Util
         {
             return m_hideTextSpotifyInactive;
         }
-
-
-
+        
         public void ReadSettingsFromFile()
         {
             Debug.WriteLine("SettingsManager:: ReadSettingsFromFile");
@@ -113,7 +111,6 @@ namespace SpotifyRemoteNS.Util
 
         public void ApplyCurrentSettings()
         {
-
             switch (m_textMode)
             {
                 case EToolbarTextMode.kAllTextVisible:
