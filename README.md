@@ -1,9 +1,11 @@
-<img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/297aadc6d2ca8b99afcb631bd2b4c1132a89fc31/VSIXSpotifyRemote/SpotifyRemoteLogo.png" width="200">
+﻿<div align="center"><img src="https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/297aadc6d2ca8b99afcb631bd2b4c1132a89fc31/VSIXSpotifyRemote/SpotifyRemoteLogo.png" width="200"></div align="center">
+<div align="center">
 
 # SpotifyRemote
 <img src="https://arjankuijpers.gallerycdn.vsassets.io/extensions/arjankuijpers/spotifyremote/2.0/1510793706623/271382/1/2017-07-16_00-24-42.gif">
 
-## For Visual Studio (2015/2017)
+## For Visual Studio (2015/2017/2019)
+</div align="center">
 
 License:
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)  
@@ -19,10 +21,10 @@ Master: [![Build status](https://ci.appveyor.com/api/projects/status/nkoom7kwayh
 * [About](#about-spotifyremote)
 * [Bug report & feature request](https://github.com/arjankuijpers/SpotifyRemote/issues)
 
-## Getting started
+## 🚀 Getting started
 
-#### Installation:
-1. [Download](https://marketplace.visualstudio.com/items?itemName=ArjanKuijpers.SpotifyRemote) the installer package (VSIX) from the [Visual Studio marketplace](https://marketplace.visualstudio.com/items?itemName=ArjanKuijpers.SpotifyRemote#review-details).
+#### 🔻 Installation:
+1. [Download](https://marketplace.visualstudio.com/items?itemName=ArjanKuijpers.SpotifyRemote) the installer package (VSIX) from the [Visual Studio marketplace](https://marketplace.visualstudio.com/items?itemName=ArjanKuijpers.SpotifyRemote#review-details). **Note: Marketplace version compatible with 2015/2017**
 2. Run the Visual Studio extension installer (VSIX).
 3. Restart Visual Studio.
 4. Go to **view** *>* **Toolbars** and Select **SpotifyRemote**  
@@ -30,13 +32,13 @@ Master: [![Build status](https://ci.appveyor.com/api/projects/status/nkoom7kwayh
 
 [Click here](https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/081ea5748298841b9385c684de59b0f88dfd9399/SpotifyRemote/docs/enable_tb_from_view.png) for full sized screenshot
 
-## Tips
+## 💡 Tips
 
 **Can it start Spotify from Visual Studio?**  
 It will, when you click a command and Spotify is not running.
 
-## Frequent Asked Questions
-**Does it work on Visual Studio 2017?**  
+## ❓ Frequent Asked Questions
+**Does it work on Visual Studio 2019?**  
 *Yes it does, try it.*  
 
 **What can SpotifyRemote do?**  
@@ -62,7 +64,7 @@ And if your changes are stable it will be merged in the release version*
 **What version of Visual Studio do I need?**  
 *At least* Visual Studio 2015
 
-## Features
+## ⚡ Features
 ### Supported
 - [x] Start Spotify
 - [x] Open Spotify
@@ -80,7 +82,7 @@ And if your changes are stable it will be merged in the release version*
 
 Do you miss a feature? Submit a request here: [Github](https://github.com/arjankuijpers/SpotifyRemote/issues)
 
-## Troubleshooting
+## 🔫 Troubleshooting
 
 **SpotifyRemote is not visible in the Visual studio**  
 Go to **view** *>* **Toolbars** and Select **SpotifyRemote** it should show up at the top of Visual Studio.
@@ -96,13 +98,28 @@ The toolbar should now be visible. (icons may be different).
 
 
 
-## About SpotifyRemote
+## 🔌 About SpotifyRemote
 
 SpotifyRemote is a attempt to recreate the awesome [vscode-spotify](https://marketplace.visualstudio.com/items?itemName=shyykoserhiy.vscode-spotify) plugin from [shyykoserhiy](https://github.com/ShyykoSerhiy/vscode-spotify).  
 This project is open source and I encourage forks and pull requests.  
 Please submit bug reports and feature requests at [Github](https://github.com/arjankuijpers/SpotifyRemote/issues).
 
-## License
+## 🛠 Building
+To build Spotify Remote you need to have:
+
+* Visual studio (2015/2017/2019)
+* Visual studio extention development module
+* Git
+
+First to clone the repo, Launch a terminal and type:
+```bash
+git clone https://github.com/YT-GameWorks/SpotifyRemote.git
+```
+on your preferred directory.
+
+Next Open the solution in visual studio and then Build it!
+
+## 📄 License
 
 [SpotifyRemote is released under the MIT License](https://raw.githubusercontent.com/arjankuijpers/SpotifyRemote/master/LICENSE).
 
