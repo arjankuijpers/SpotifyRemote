@@ -1,11 +1,11 @@
-﻿namespace SpotifyRemoteNS
-{
-    using Microsoft.VisualStudio.PlatformUI;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Microsoft.VisualStudio.PlatformUI;
+using SpotifyRemoteNS.Util;
 
+namespace SpotifyRemoteNS
+{
     /// <summary>
     /// Interaction logic for SpotifyRemoteSettingsControl.
     /// </summary>
@@ -101,18 +101,19 @@
             SettingsManager sm = SettingsManager.GetSettingsManager();
             if (rb_tv0.IsChecked == true)
             {
-                sm.SetButtonTextMode(SettingsManager.eToolbarTextMode.kAllTextVisible);   
+                sm.SetButtonTextMode(SettingsManager.eToolbarTextMode.kAllTextVisible);
             }
-            else if(rb_tv1.IsChecked == true)
+            else if (rb_tv1.IsChecked == true)
             {
                 sm.SetButtonTextMode(SettingsManager.eToolbarTextMode.kOpenTextVisible);
             }
-            else {
+            else
+            {
                 sm.SetButtonTextMode(SettingsManager.eToolbarTextMode.kHideAllText);
             }
 
 
-            if(checkBox_hideText.IsChecked == true)
+            if (checkBox_hideText.IsChecked == true)
             {
                 sm.SetHideTextSpotifyInactive(true);
             }
@@ -122,7 +123,7 @@
             }
 
 
-            if(checkBox_ShowTrackArtist.IsChecked == true && checkBox_enableInteractiveAnimation.IsChecked == true)
+            if (checkBox_ShowTrackArtist.IsChecked == true && checkBox_enableInteractiveAnimation.IsChecked == true)
             {
                 sm.SetTrackChangeMode(SettingsManager.eToolbarTrackChangeMode.kEnabledWithAnimation);
             }
@@ -135,7 +136,7 @@
                 sm.SetTrackChangeMode(SettingsManager.eToolbarTrackChangeMode.kDisabled);
             }
 
-           
+
         }
 
 
@@ -236,6 +237,6 @@
             additionalInfoEnableAnimation.Foreground = scb;
         }
 
-        
+
     }
 }

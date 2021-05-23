@@ -1,7 +1,6 @@
-
 language: csharp
 solution: "./SpotifyRemote.sln"
 install:
 - travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./SpotifyRemote.sln
 script:
-- xbuild ./SpotifyRemote.sln
+- msbuild "./SpotifyRemote.sln" /verbosity:minimal

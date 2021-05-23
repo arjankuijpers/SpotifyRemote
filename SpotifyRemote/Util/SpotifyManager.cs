@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using SpotifyRemoteNS.commands;
 using SpotLocalAPI = SpotifyAPI.Local.SpotifyLocalAPI;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.Util
 {
     public class SpotifyManager
     {
@@ -27,7 +23,7 @@ namespace SpotifyRemoteNS
             Debug.WriteLine("SpotifyManager Initialize.");
             ConnectToSpotifyClient();
 
-            if(!IsSpotifyProcessRunning())
+            if (!IsSpotifyProcessRunning())
             {
                 CommandOpenSpotify.Instance.m_currentTextlabel = CommandOpenSpotify.kSpotifyStartString;
             }
@@ -35,7 +31,7 @@ namespace SpotifyRemoteNS
             {
                 CommandOpenSpotify.Instance.m_currentTextlabel = CommandOpenSpotify.kSpotifyOpenString;
             }
-           
+
             return true;
         }
         public void Destroy()
@@ -47,9 +43,9 @@ namespace SpotifyRemoteNS
 
         public bool GetSpotifyConnectionStatus()
         {
-            if(spotClient != null && spotClientConnected)
+            if (spotClient != null && spotClientConnected)
             {
-                if(spotClient.GetStatus() == null)
+                if (spotClient.GetStatus() == null)
                 {
                     spotClient = null;
                     spotClientConnected = false;
@@ -81,7 +77,7 @@ namespace SpotifyRemoteNS
                 Debug.WriteLine("Spotify Client Connected: {0}", connected);
                 Debug.Assert(connected);
 #endif
-                if(connected)
+                if (connected)
                 {
                     RegisterEvents();
                 }
@@ -116,11 +112,11 @@ namespace SpotifyRemoteNS
         {
             Debug.WriteLine("SpotifyManager:: OpenSpotify.");
             Process spotifyWindow = null;
-            if((spotifyWindow = GetSpotifyWindowProcess()) != null)
+            if ((spotifyWindow = GetSpotifyWindowProcess()) != null)
             {
                 UnsafeNativeMethods.BringProcessToFront(spotifyWindow);
             }
-            else if(!SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
+            else if (!SpotifyAPI.Local.SpotifyLocalAPI.IsSpotifyRunning())
             {
                 Debug.WriteLine("Spotify not running.");
                 SpotifyAPI.Local.SpotifyLocalAPI.RunSpotify();
@@ -136,11 +132,11 @@ namespace SpotifyRemoteNS
         public void NextTrack()
         {
             Debug.WriteLine("SpotifyManager:: NextTrack.");
-            if(!GetSpotifyConnectionStatus())
+            if (!GetSpotifyConnectionStatus())
             {
                 ConnectToSpotifyClient();
             }
-            if(GetSpotifyConnectionStatus())
+            if (GetSpotifyConnectionStatus())
             {
 
                 spotClient.Skip();
@@ -170,7 +166,7 @@ namespace SpotifyRemoteNS
             }
             if (GetSpotifyConnectionStatus())
             {
-                if(spotClient.GetStatus().Playing)
+                if (spotClient.GetStatus().Playing)
                 {
                     spotClient.Pause();
                 }
@@ -245,7 +241,7 @@ namespace SpotifyRemoteNS
             SpotifyClientPlayStateChange?.Invoke(this, e);
         }
     }
-   
+
 
 
 

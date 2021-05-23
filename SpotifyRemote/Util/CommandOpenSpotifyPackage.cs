@@ -1,18 +1,11 @@
 ﻿using System;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Runtime.InteropServices;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.OLE.Interop;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.Win32;
-using EnvDTE80;
 using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
+using SpotifyRemoteNS.commands;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.Util
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -35,7 +28,7 @@ namespace SpotifyRemoteNS
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(SpotifyRemote.PackageGuidString)]
-    [ProvideToolWindow(typeof(SpotifyRemoteNS.SpotifyRemoteSettings))]
+    [ProvideToolWindow(typeof(SpotifyRemoteSettings))]
     [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]
     public sealed class SpotifyRemote : Package
     {
@@ -83,7 +76,7 @@ namespace SpotifyRemoteNS
 
             m_spotifyManager = new SpotifyManager();
             sm.SetSpotifyManager(ref m_spotifyManager);
-    
+
 
         }
 
@@ -95,13 +88,13 @@ namespace SpotifyRemoteNS
         /// </summary>
         protected override void Initialize()
         {
-            
 
 
-            
+
+
             base.Initialize();
 
-           
+
 
             m_packageDTEEvents = ApplicationObject.Events.DTEEvents;
             m_packageDTEEvents.OnBeginShutdown += SpotifyRemoteDTEEventBeginShutdown;
@@ -114,15 +107,15 @@ namespace SpotifyRemoteNS
             CommandNextTrack.Initialize(this);
             CommandPlayPause.Initialize(this);
             CommandPreviousTrack.Initialize(this);
-            SpotifyRemoteNS.SpotifyRemoteSettingsCommand.Initialize(this);
-            SpotifyRemoteNS.CommandOpenSettings.Initialize(this);
+            SpotifyRemoteSettingsCommand.Initialize(this);
+            CommandOpenSettings.Initialize(this);
 
             sm.ReadSettingsFromFile();
             sm.ApplyCurrentSettings();
 
             m_spotifyManager.Initialize();
 
-            
+
 
 
 
@@ -130,13 +123,13 @@ namespace SpotifyRemoteNS
 
         public ref SpotifyManager GetSpotifyManager()
         {
-           return ref m_spotifyManager;
+            return ref m_spotifyManager;
         }
 
         private void SpotifyRemoteDTEEventOnStartupComplete()
         {
 
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         private void SpotifyRemoteDTEEventBeginShutdown()

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.PlatformUI;
-
-using MediaColor = System.Windows.Media.Color;
+﻿using Microsoft.VisualStudio.PlatformUI;
 using DrawingColor = System.Drawing.Color;
+using MediaColor = System.Windows.Media.Color;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.Util
 {
     static class ThemeHelper
     {

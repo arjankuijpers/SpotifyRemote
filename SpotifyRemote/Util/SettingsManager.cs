@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.VisualStudio.Shell;
-using System.Diagnostics;
+using SpotifyRemoteNS.commands;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.Util
 {
-    public class SettingsManager   
+    public class SettingsManager
     {
         public enum eToolbarTextMode
         {
@@ -180,9 +176,9 @@ namespace SpotifyRemoteNS
                     break;
             }
 
-            
-            
-           
+
+
+
         }
 
 

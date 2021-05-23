@@ -1,23 +1,19 @@
 ﻿using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
+using SpotifyRemoteNS.Util;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.commands
 {
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class CommandPlayPause
+    internal sealed class CommandOpenSettings
     {
-
-        public const string commandText = "Play/Pause";
-
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 4178;
+        public const int CommandId = 4180;
 
         /// <summary>
         /// Command menu group (command set GUID).
@@ -28,14 +24,13 @@ namespace SpotifyRemoteNS
         /// VS Package that provides this command, not null.
         /// </summary>
         private readonly Package package;
-        private SpotifyManager m_spotifyManager;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandPlayPause"/> class.
+        /// Initializes a new instance of the <see cref="CommandOpenSettings"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        private CommandPlayPause(Package package)
+        private CommandOpenSettings(Package package)
         {
             if (package == null)
             {
@@ -43,26 +38,20 @@ namespace SpotifyRemoteNS
             }
 
             this.package = package;
-            SpotifyRemote spotifyRemotePackage = package as SpotifyRemote;
-            m_spotifyManager = spotifyRemotePackage.GetSpotifyManager();
 
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            OleMenuCommand menuItem = null;
+            var commandService = ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                menuItem = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
+                var menuItem = new MenuCommand(MenuItemCallback, menuCommandID);
                 commandService.AddCommand(menuItem);
             }
-
-            SettingsManager setManager = SettingsManager.GetSettingsManager();
-            setManager.SetTbButtonPlayPause(ref menuItem);
         }
 
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static CommandPlayPause Instance
+        public static CommandOpenSettings Instance
         {
             get;
             private set;
@@ -75,7 +64,7 @@ namespace SpotifyRemoteNS
         {
             get
             {
-                return this.package;
+                return package;
             }
         }
 
@@ -85,7 +74,7 @@ namespace SpotifyRemoteNS
         /// <param name="package">Owner package, not null.</param>
         public static void Initialize(Package package)
         {
-            Instance = new CommandPlayPause(package);
+            Instance = new CommandOpenSettings(package);
         }
 
         /// <summary>
@@ -97,9 +86,8 @@ namespace SpotifyRemoteNS
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-           
-            // execute
-            m_spotifyManager.PlayPause();
+
+            SpotifyRemoteSettingsCommand.ShowSettings(package);
         }
     }
 }
