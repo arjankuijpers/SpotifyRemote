@@ -1,24 +1,22 @@
 ﻿using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
+using SpotifyRemoteNS.Util;
 
-
-
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.commands
 {
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class CommandNextTrack
+    internal sealed class CommandPreviousTrack
     {
 
-        public const string commandText = "Next";
+        public const string commandText = "Previous";
+
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 4177;
+        public const int CommandId = 4179;
 
         /// <summary>
         /// Command menu group (command set GUID).
@@ -32,11 +30,11 @@ namespace SpotifyRemoteNS
         private SpotifyManager m_spotifyManager;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandNextTrack"/> class.
+        /// Initializes a new instance of the <see cref="CommandPreviousTrack"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        private CommandNextTrack(Package package)
+        private CommandPreviousTrack(Package package)
         {
             if (package == null)
             {
@@ -57,13 +55,13 @@ namespace SpotifyRemoteNS
             }
 
             SettingsManager setManager = SettingsManager.GetSettingsManager();
-            setManager.SetTbButtonNext(ref menuItem);
+            setManager.SetTbButtonPrevious(ref menuItem);
         }
 
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static CommandNextTrack Instance
+        public static CommandPreviousTrack Instance
         {
             get;
             private set;
@@ -86,7 +84,7 @@ namespace SpotifyRemoteNS
         /// <param name="package">Owner package, not null.</param>
         public static void Initialize(Package package)
         {
-            Instance = new CommandNextTrack(package);
+            Instance = new CommandPreviousTrack(package);
         }
 
         /// <summary>
@@ -98,9 +96,9 @@ namespace SpotifyRemoteNS
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-           
+
             // execute
-            m_spotifyManager.NextTrack();
+            m_spotifyManager.PreviousTrack();
         }
     }
 }

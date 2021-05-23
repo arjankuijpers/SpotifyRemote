@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.VisualStudio.Shell;
-using System.Diagnostics;
+using SpotifyRemoteNS.commands;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.Util
 {
-    public class SettingsManager   
+    public class SettingsManager
     {
-        public enum eToolbarTextMode
+        public enum EToolbarTextMode
         {
             kAllTextVisible = 0,
             kOpenTextVisible = 1,
             kHideAllText = 3,
         }
 
-        public enum eToolbarTrackChangeMode
+        public enum EToolbarTrackChangeMode
         {
             kDisabled = 0,
             kEnabledNoAnimation = 1,
@@ -37,8 +33,8 @@ namespace SpotifyRemoteNS
         TrackChangeAnimator m_trackChangeAnimator;
         SpotifyManager m_spotifyManager;
 
-        eToolbarTextMode m_textMode;
-        eToolbarTrackChangeMode m_trackChangeMode;
+        EToolbarTextMode m_textMode;
+        EToolbarTrackChangeMode m_trackChangeMode;
         bool m_hideTextSpotifyInactive;
 
 
@@ -59,12 +55,12 @@ namespace SpotifyRemoteNS
         ///////////////////////////////////////////
 
         // Toolbar Text Mode
-        public void SetButtonTextMode(eToolbarTextMode textMode)
+        public void SetButtonTextMode(EToolbarTextMode textMode)
         {
             m_textMode = textMode;
         }
 
-        public eToolbarTextMode GetButtonTextMode()
+        public EToolbarTextMode GetButtonTextMode()
         {
             return m_textMode;
         }
@@ -72,12 +68,12 @@ namespace SpotifyRemoteNS
         // Toolbar Text Mode End
         ///////////////////////////////////////////
 
-        public void SetTrackChangeMode(eToolbarTrackChangeMode trackChangeMode)
+        public void SetTrackChangeMode(EToolbarTrackChangeMode trackChangeMode)
         {
             m_trackChangeMode = trackChangeMode;
         }
 
-        public eToolbarTrackChangeMode GetTrackChangeMode()
+        public EToolbarTrackChangeMode GetTrackChangeMode()
         {
             return m_trackChangeMode;
         }
@@ -91,15 +87,13 @@ namespace SpotifyRemoteNS
         {
             return m_hideTextSpotifyInactive;
         }
-
-
-
+        
         public void ReadSettingsFromFile()
         {
             Debug.WriteLine("SettingsManager:: ReadSettingsFromFile");
             UserSettings.Default.Reload();
-            m_textMode = (eToolbarTextMode)UserSettings.Default.TextToolbarVisibleMode;
-            m_trackChangeMode = (eToolbarTrackChangeMode)UserSettings.Default.TrackInfoOnChangeMode;
+            m_textMode = (EToolbarTextMode)UserSettings.Default.TextToolbarVisibleMode;
+            m_trackChangeMode = (EToolbarTrackChangeMode)UserSettings.Default.TrackInfoOnChangeMode;
             m_hideTextSpotifyInactive = UserSettings.Default.TextToolbarHiddenOnInactive;
 
         }
@@ -117,22 +111,21 @@ namespace SpotifyRemoteNS
 
         public void ApplyCurrentSettings()
         {
-
             switch (m_textMode)
             {
-                case eToolbarTextMode.kAllTextVisible:
+                case EToolbarTextMode.kAllTextVisible:
                     m_tbButtonOpen.Text = m_cmdOpenSpotify.m_currentTextlabel;
                     m_tbButtonPrevious.Text = CommandPreviousTrack.commandText;
                     m_tbButtonPlayPause.Text = CommandPlayPause.commandText;
                     m_tbButtonNext.Text = CommandNextTrack.commandText;
                     break;
-                case eToolbarTextMode.kOpenTextVisible:
+                case EToolbarTextMode.kOpenTextVisible:
                     m_tbButtonOpen.Text = m_cmdOpenSpotify.m_currentTextlabel;
                     m_tbButtonPrevious.Text = " ";
                     m_tbButtonPlayPause.Text = " ";
                     m_tbButtonNext.Text = " ";
                     break;
-                case eToolbarTextMode.kHideAllText:
+                case EToolbarTextMode.kHideAllText:
                     m_tbButtonOpen.Text = " ";
                     m_tbButtonPrevious.Text = " ";
                     m_tbButtonPlayPause.Text = " ";
@@ -161,15 +154,15 @@ namespace SpotifyRemoteNS
 
             switch (m_trackChangeMode)
             {
-                case eToolbarTrackChangeMode.kDisabled:
+                case EToolbarTrackChangeMode.kDisabled:
                     m_trackChangeAnimator.SetTrackChange(false);
                     m_trackChangeAnimator.SetAnimationOnChange(false);
                     break;
-                case eToolbarTrackChangeMode.kEnabledNoAnimation:
+                case EToolbarTrackChangeMode.kEnabledNoAnimation:
                     m_trackChangeAnimator.SetTrackChange(true);
                     m_trackChangeAnimator.SetAnimationOnChange(false);
                     break;
-                case eToolbarTrackChangeMode.kEnabledWithAnimation:
+                case EToolbarTrackChangeMode.kEnabledWithAnimation:
                     m_trackChangeAnimator.SetTrackChange(true);
                     m_trackChangeAnimator.SetAnimationOnChange(true);
                     break;
@@ -180,9 +173,9 @@ namespace SpotifyRemoteNS
                     break;
             }
 
-            
-            
-           
+
+
+
         }
 
 

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
+using SpotifyRemoteNS.Util;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.commands
 {
     /// <summary>
     /// Command handler
@@ -65,23 +64,23 @@ namespace SpotifyRemoteNS
             {
                 throw new ArgumentNullException("package");
             }
-            SpotifyRemote spotifyRemotePackage = package as SpotifyRemote;
+            var spotifyRemotePackage = package as SpotifyRemote;
             m_spotifyManager = spotifyRemotePackage.GetSpotifyManager();
-            
+
 
             this.package = package;
- 
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+
+            var commandService = ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             OleMenuCommand menuItem = null;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                menuItem = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
+                menuItem = new OleMenuCommand(MenuItemCallback, menuCommandID);
                 commandService.AddCommand(menuItem);
             }
 
 
-            
+
 
             // Initialize TrackChangeAnimator.
             m_trackChangeAnimator = new TrackChangeAnimator();
@@ -90,7 +89,7 @@ namespace SpotifyRemoteNS
             m_spotifyManager.SpotifyClientTrackChange += SpotifyClientTrackChange;
 
 
-            SettingsManager setManager = SettingsManager.GetSettingsManager();
+            var setManager = SettingsManager.GetSettingsManager();
             setManager.SetTbButtonOpen(ref menuItem);
             setManager.SetTrackChangeAnimation(ref m_trackChangeAnimator);
 
@@ -115,7 +114,7 @@ namespace SpotifyRemoteNS
         {
             get
             {
-                return this.package;
+                return package;
             }
         }
 
@@ -126,7 +125,7 @@ namespace SpotifyRemoteNS
         public static void Initialize(Package package)
         {
             Instance = new CommandOpenSpotify(package);
-            SettingsManager setManager = SettingsManager.GetSettingsManager();
+            var setManager = SettingsManager.GetSettingsManager();
             setManager.SetCmdOpenSpotify(ref Instance);
         }
 

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.commands
 {
     /// <summary>
     /// Command handler
@@ -40,11 +39,11 @@ namespace SpotifyRemoteNS
 
             this.package = package;
 
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var commandService = ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new MenuCommand(this.ShowToolWindow, menuCommandID);
+                var menuItem = new MenuCommand(ShowToolWindow, menuCommandID);
                 commandService.AddCommand(menuItem);
             }
         }
@@ -65,7 +64,7 @@ namespace SpotifyRemoteNS
         {
             get
             {
-                return this.package;
+                return package;
             }
         }
 
@@ -88,13 +87,13 @@ namespace SpotifyRemoteNS
             // Get the instance number 0 of this tool window. This window is single instance so this instance
             // is actually the only one.
             // The last flag is set to true so that if the tool window does not exists it will be created.
-            ToolWindowPane window = this.package.FindToolWindow(typeof(SpotifyRemoteSettings), 0, true);
-            if ((null == window) || (null == window.Frame))
+            ToolWindowPane window = package.FindToolWindow(typeof(SpotifyRemoteSettings), 0, true);
+            if (null == window || null == window.Frame)
             {
                 throw new NotSupportedException("Cannot create tool window");
             }
 
-            IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
+            var windowFrame = (IVsWindowFrame)window.Frame;
             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
@@ -104,12 +103,12 @@ namespace SpotifyRemoteNS
             // is actually the only one.
             // The last flag is set to true so that if the tool window does not exists it will be created.
             ToolWindowPane window = p.FindToolWindow(typeof(SpotifyRemoteSettings), 0, true);
-            if ((null == window) || (null == window.Frame))
+            if (null == window || null == window.Frame)
             {
                 throw new NotSupportedException("Cannot create tool window");
             }
 
-            IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
+            var windowFrame = (IVsWindowFrame)window.Frame;
             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
     }

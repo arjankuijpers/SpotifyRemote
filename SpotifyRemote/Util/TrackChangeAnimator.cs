@@ -1,13 +1,9 @@
-﻿using SpotifyAPI.Local.Models;
-using Microsoft.VisualStudio.Shell;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Diagnostics;
+using Microsoft.VisualStudio.Shell;
+using SpotifyAPI.Local.Models;
 
-namespace SpotifyRemoteNS
+namespace SpotifyRemoteNS.Util
 {
     public class TrackChangeAnimator
     {
@@ -16,19 +12,19 @@ namespace SpotifyRemoteNS
         string m_standardCommandText;
         bool m_trackChangeEnabled = true;
         bool m_animationEnabled = true;
-       
+
         internal System.Timers.Timer m_timer = null;
 
         private const float m_animationTimeWait = 5000; //ms
         private const float m_animationFrameTime = 125; //ms
 
 
-       public bool Initialize(OleMenuCommand menuCommand, string menuCommandText)
+        public bool Initialize(OleMenuCommand menuCommand, string menuCommandText)
         {
             Debug.WriteLine("TrackChangeAnimator:: Initialize.");
             m_menuCommand = menuCommand;
             m_standardCommandText = menuCommandText;
-            
+
             return true;
         }
 
@@ -43,7 +39,7 @@ namespace SpotifyRemoteNS
             m_animationEnabled = enabled;
         }
 
-       public void SetStandardCommandText(string text)
+        public void SetStandardCommandText(string text)
         {
             m_standardCommandText = text;
         }
@@ -63,7 +59,7 @@ namespace SpotifyRemoteNS
                 return;
             }
 
-            if(!m_trackChangeEnabled)
+            if (!m_trackChangeEnabled)
             {
                 return;
             }
@@ -72,7 +68,7 @@ namespace SpotifyRemoteNS
             StartTrackChangeAnimation();
 
 
-            
+
         }
 
         public void StopTrackChange()
@@ -92,7 +88,7 @@ namespace SpotifyRemoteNS
             m_menuCommand.Text = String.Format("{0} - {1}", trackName, artistName);
 
 
-            if(m_timer != null)
+            if (m_timer != null)
             {
                 m_timer.Stop();
                 m_timer.Start();
@@ -111,7 +107,7 @@ namespace SpotifyRemoteNS
             m_timer.Stop();
             m_timer.Elapsed -= TrackChangeAnimTimerTick;
 
-            if(!m_animationEnabled)
+            if (!m_animationEnabled)
             {
                 m_timer = null;
                 m_menuCommand.Text = m_standardCommandText;
